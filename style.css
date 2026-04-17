@@ -406,56 +406,103 @@ body {
 }
 
 .spending-icon {
-  font-size: 28px;
-  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+.spending-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .spending-label {
-  display: block;
+  flex: 1;
   font-size: 14px;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 10px;
 }
 
-.input-wrapper {
-  display: flex;
-  align-items: center;
-  background: var(--bg-card);
-  border: 2px solid var(--border);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  transition: var(--transition);
+.spending-value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  background: rgba(108, 92, 231, 0.08);
+  padding: 4px 10px;
+  border-radius: 999px;
 }
 
-.input-wrapper:focus-within {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+.spending-period {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-light);
+  margin-left: 2px;
 }
 
 .input-prefix {
-  padding: 10px 12px;
-  background: var(--bg);
-  color: var(--text-light);
   font-weight: 700;
-  font-size: 15px;
-  border-right: 1px solid var(--border);
 }
 
-.spending-input {
-  flex: 1;
-  border: none;
-  padding: 10px 12px;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text);
+.spending-hint {
+  font-size: 13px;
+  color: var(--text-light);
+  margin: -8px 0 16px 0;
+  padding: 10px 14px;
+  background: rgba(108, 92, 231, 0.06);
+  border-left: 3px solid var(--primary);
+  border-radius: 4px;
+}
+
+/* Slider styling — cross-browser */
+.spending-input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, var(--primary) 0%, var(--primary) var(--fill, 0%), var(--border) var(--fill, 0%), var(--border) 100%);
   outline: none;
-  background: transparent;
+  cursor: pointer;
+  margin: 4px 0;
 }
 
-.spending-input::placeholder {
+.spending-input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(108, 92, 231, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.spending-input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.spending-input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(108, 92, 231, 0.4);
+  cursor: pointer;
+}
+
+.slider-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
   color: var(--text-lighter);
-  font-weight: 400;
+  margin-top: 6px;
+  font-weight: 500;
 }
 
 .spend-summary {
@@ -1012,6 +1059,246 @@ body {
 .partner-ratio {
   font-size: 12px;
   color: var(--text-light);
+}
+
+.program-loyalty {
+  font-size: 13px;
+  color: var(--text-light);
+  margin: 4px 0 12px 0;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-left: 3px solid var(--primary);
+  border-radius: 4px;
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.portal-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.portal-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.portal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.portal-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.portal-boost {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--primary);
+  padding: 3px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.portal-desc {
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.5;
+  margin: 2px 0;
+}
+
+.portal-url {
+  font-size: 12px;
+  color: var(--primary);
+  font-family: "SF Mono", Monaco, monospace;
+  font-weight: 600;
+}
+
+.portal-rates {
+  background: rgba(108, 92, 231, 0.06);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 8px 0 4px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.portal-rates-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.portal-rate-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text);
+  padding: 3px 0;
+}
+
+.portal-rate-calc {
+  font-family: "SF Mono", Monaco, monospace;
+  color: var(--text-light);
+}
+
+.portal-rate-calc strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Accelerated Reward Rates table */
+.rate-legend {
+  font-size: 12px;
+  color: var(--text-light);
+  margin: 4px 0 10px 0;
+  font-style: italic;
+}
+
+.rate-table th {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--border);
+}
+
+.rate-table th:last-child,
+.rate-boost-cell {
+  text-align: right;
+}
+
+.rate-boost-cell {
+  min-width: 180px;
+}
+
+.rate-boost-badge {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-right: 6px;
+}
+
+.rate-boost-cell strong {
+  color: var(--primary);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.rate-boost-via {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.rate-alt {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.rate-no-boost {
+  color: var(--text-lighter);
+  font-size: 14px;
+}
+
+/* Breakdown table (portal-aware) */
+.breakdown-table th {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--border);
+}
+
+.breakdown-table .calc-cell {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.calc-line {
+  padding: 2px 0;
+}
+
+.calc-portal-pill {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.calc-note {
+  color: var(--text-light);
+  font-size: 11px;
+  font-style: italic;
+  margin: 0 4px;
+}
+
+.calc-effective {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px dashed var(--border);
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.calc-effective strong {
+  color: var(--primary);
+  font-size: 13px;
+}
+
+.baseline-row td {
+  font-size: 12px;
+  color: var(--text-light);
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+
+.uplift-row td {
+  font-size: 13px;
+  font-weight: 600;
+  color: #00b894;
+}
+
+.uplift-val {
+  color: #00b894;
+  font-weight: 700;
 }
 
 .benefits-list {

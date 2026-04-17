@@ -280,6 +280,190 @@ const CARDS_DATABASE = [
     cardColor: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)",
     textColor: "#ffffff",
   },
+  {
+    id: "hdfc-diners-black-metal",
+    name: "HDFC Diners Club Black Metal Edition",
+    bank: "HDFC Bank",
+    bankLogo: "🏦",
+    network: "Diners Club",
+    tier: "super-premium",
+    annualFee: 10000,
+    renewalFee: 10000,
+    feeWaiverSpend: 800000,
+    joiningBonus: 10000,
+    joiningBonusUnit: "reward points",
+    minIncome: 1750000,
+    inviteOnly: false,
+    rewardRate: {
+      base: 3.3,
+      dining: 3.3,
+      travel: 3.3,
+      grocery: 3.3,
+      fuel: 3.3,
+      onlineShopping: 3.3,
+      utilities: 3.3,
+      entertainment: 3.3,
+      smartbuy: 10.0,
+      weekendDining: 5.0,
+    },
+    rewardUnit: "Reward Points (1 RP = ₹1 via SmartBuy)",
+    transferPartners: [
+      { name: "Marriott Bonvoy", ratio: "1:1", type: "hotel" },
+      { name: "Singapore Airlines KrisFlyer", ratio: "2:1", type: "airline" },
+      { name: "InterMiles", ratio: "1:1", type: "airline" },
+      { name: "British Airways Avios", ratio: "1:1", type: "airline" },
+      { name: "Air France/KLM Flying Blue", ratio: "2:1", type: "airline" },
+    ],
+    loungeAccess: "Unlimited domestic & international (Priority Pass)",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "Air accident ₹2 Cr, Purchase protection ₹9 Lakh",
+    concierge: true,
+    golfAccess: true,
+    bestFor: ["travel", "hotels", "premium-lifestyle", "dining"],
+    highlights: [
+      "Premium metal card design",
+      "3.3% reward rate across all spends, 10x via SmartBuy",
+      "Unlimited airport lounge access (domestic & international)",
+      "Complimentary memberships: Club Marriott, Amazon Prime, Swiggy One, Times Prime",
+      "2x complimentary golf rounds/month at premium courses",
+    ],
+    applyUrl: "#affiliate-hdfc-diners-black-metal",
+    cardColor: "linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #4a4a4a 100%)",
+    textColor: "#d4af37",
+  },
+  {
+    id: "hdfc-tata-neu-infinity",
+    name: "HDFC Tata Neu Infinity",
+    bank: "HDFC Bank",
+    bankLogo: "🏦",
+    network: "Visa/RuPay",
+    tier: "premium",
+    annualFee: 1499,
+    renewalFee: 1499,
+    feeWaiverSpend: 300000,
+    joiningBonus: 1499,
+    joiningBonusUnit: "NeuCoins",
+    minIncome: 600000,
+    inviteOnly: false,
+    rewardRate: {
+      base: 1.5,
+      dining: 1.5,
+      travel: 1.5,
+      grocery: 1.5,
+      fuel: 1.5,
+      onlineShopping: 1.5,
+      utilities: 1.5,
+      entertainment: 1.5,
+      tataNeuApp: 5.0,
+      tataBrands: 5.0,
+    },
+    rewardUnit: "NeuCoins (1 NeuCoin = ₹1 in Tata ecosystem)",
+    transferPartners: [],
+    loungeAccess: "8 domestic + 4 international per year",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "Air accident ₹1 Cr",
+    concierge: false,
+    golfAccess: false,
+    bestFor: ["tata-ecosystem", "grocery", "online-shopping"],
+    highlights: [
+      "5% NeuCoins on Tata Neu App & Tata brands (BigBasket, Croma, AirAsia, Taj, 1mg)",
+      "1.5% NeuCoins on all other spends",
+      "RuPay variant supports UPI payments",
+      "Airport lounge access across domestic & international",
+      "Best for households shopping within Tata ecosystem",
+    ],
+    applyUrl: "#affiliate-hdfc-tata-neu-infinity",
+    cardColor: "linear-gradient(135deg, #4b0082 0%, #6a0dad 50%, #9b30ff 100%)",
+    textColor: "#ffffff",
+  },
+  {
+    id: "hdfc-swiggy",
+    name: "HDFC Swiggy Credit Card",
+    bank: "HDFC Bank",
+    bankLogo: "🏦",
+    network: "Mastercard",
+    tier: "entry",
+    annualFee: 500,
+    renewalFee: 500,
+    feeWaiverSpend: 200000,
+    joiningBonus: 500,
+    joiningBonusUnit: "Swiggy Money",
+    minIncome: 300000,
+    inviteOnly: false,
+    rewardRate: {
+      base: 1.0,
+      dining: 10.0,
+      travel: 1.0,
+      grocery: 5.0,
+      fuel: 1.0,
+      onlineShopping: 5.0,
+      utilities: 1.0,
+      entertainment: 1.0,
+      swiggyApp: 10.0,
+    },
+    rewardUnit: "Swiggy Cashback (1:1 ₹ on Swiggy)",
+    transferPartners: [],
+    loungeAccess: "None",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "None",
+    concierge: false,
+    golfAccess: false,
+    bestFor: ["dining", "food-delivery", "online-shopping"],
+    highlights: [
+      "10% cashback on Swiggy (Food, Instamart, Dineout, Genie)",
+      "5% cashback on online shopping (Amazon, Flipkart, Myntra, etc.)",
+      "1% cashback on all other spends",
+      "Complimentary Swiggy One membership (3 months)",
+      "Best card if you spend heavily on food delivery",
+    ],
+    applyUrl: "#affiliate-hdfc-swiggy",
+    cardColor: "linear-gradient(135deg, #fc8019 0%, #ff6b00 100%)",
+    textColor: "#ffffff",
+  },
+  {
+    id: "hdfc-phonepe",
+    name: "HDFC PhonePe Credit Card",
+    bank: "HDFC Bank",
+    bankLogo: "🏦",
+    network: "RuPay",
+    tier: "entry",
+    annualFee: 499,
+    renewalFee: 499,
+    feeWaiverSpend: 200000,
+    joiningBonus: 500,
+    joiningBonusUnit: "cashback",
+    minIncome: 300000,
+    inviteOnly: false,
+    rewardRate: {
+      base: 1.0,
+      dining: 2.0,
+      travel: 2.0,
+      grocery: 3.0,
+      fuel: 1.0,
+      onlineShopping: 3.0,
+      utilities: 3.0,
+      entertainment: 2.0,
+      phonepeApp: 3.0,
+    },
+    rewardUnit: "Cashback (direct ₹ credit)",
+    transferPartners: [],
+    loungeAccess: "None",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "None",
+    concierge: false,
+    golfAccess: false,
+    bestFor: ["upi-payments", "utilities", "online-shopping"],
+    highlights: [
+      "3% cashback on PhonePe transactions & bill payments",
+      "RuPay card enables UPI — scan & pay via PhonePe",
+      "2% on dining, travel, entertainment",
+      "Low joining fee, easy waiver threshold",
+      "Best everyday UPI-credit card combination",
+    ],
+    applyUrl: "#affiliate-hdfc-phonepe",
+    cardColor: "linear-gradient(135deg, #5f259f 0%, #7b2cbf 100%)",
+    textColor: "#ffffff",
+  },
 
   // ──────────────────────────────────────────────────────────
   // ICICI BANK CARDS
@@ -502,6 +686,102 @@ const CARDS_DATABASE = [
     ],
     applyUrl: "#affiliate-icici-coral",
     cardColor: "linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)",
+    textColor: "#ffffff",
+  },
+  {
+    id: "icici-times-black",
+    name: "ICICI Times Black Credit Card",
+    bank: "ICICI Bank",
+    bankLogo: "🏧",
+    network: "Visa Infinite",
+    tier: "super-premium",
+    annualFee: 20000,
+    renewalFee: 20000,
+    feeWaiverSpend: null,
+    joiningBonus: 25000,
+    joiningBonusUnit: "Times Prime + vouchers worth ₹30,000",
+    minIncome: 2500000,
+    inviteOnly: false,
+    rewardRate: {
+      base: 2.0,
+      dining: 5.0,
+      travel: 5.0,
+      grocery: 2.0,
+      fuel: 2.0,
+      onlineShopping: 3.0,
+      utilities: 2.0,
+      entertainment: 5.0,
+    },
+    rewardUnit: "ICICI Reward Points (1 RP = ₹0.25)",
+    transferPartners: [
+      { name: "Singapore Airlines KrisFlyer", ratio: "4:1", type: "airline" },
+      { name: "British Airways Avios", ratio: "4:1", type: "airline" },
+      { name: "Etihad Guest", ratio: "4:1", type: "airline" },
+    ],
+    loungeAccess: "Unlimited domestic & international (Priority Pass)",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "Air accident ₹3 Cr, Purchase protection",
+    concierge: true,
+    golfAccess: true,
+    bestFor: ["travel", "dining", "entertainment", "premium-lifestyle"],
+    highlights: [
+      "Complimentary Times Prime, EazyDiner Prime, Club Marriott memberships",
+      "5% rewards on dining, travel & entertainment",
+      "Unlimited lounge access worldwide (self + guest)",
+      "Milestone vouchers worth ₹30,000 annually on ₹6L+ spend",
+      "Dedicated Times Black concierge & golf access",
+    ],
+    applyUrl: "#affiliate-icici-times-black",
+    cardColor: "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2c2c2c 100%)",
+    textColor: "#c9a227",
+  },
+  {
+    id: "icici-emeralde-private-metal",
+    name: "ICICI Emeralde Private Metal",
+    bank: "ICICI Bank",
+    bankLogo: "🏧",
+    network: "Visa Infinite",
+    tier: "super-premium",
+    annualFee: 12499,
+    renewalFee: 12499,
+    feeWaiverSpend: 1000000,
+    joiningBonus: 12500,
+    joiningBonusUnit: "reward points",
+    minIncome: 3600000,
+    inviteOnly: true,
+    rewardRate: {
+      base: 3.0,
+      dining: 6.0,
+      travel: 6.0,
+      grocery: 3.0,
+      fuel: 3.0,
+      onlineShopping: 3.0,
+      utilities: 3.0,
+      entertainment: 6.0,
+    },
+    rewardUnit: "ICICI Emeralde Points (1 EP = ₹1)",
+    transferPartners: [
+      { name: "Singapore Airlines KrisFlyer", ratio: "2:1", type: "airline" },
+      { name: "British Airways Avios", ratio: "2:1", type: "airline" },
+      { name: "Etihad Guest", ratio: "2:1", type: "airline" },
+      { name: "Turkish Airlines Miles&Smiles", ratio: "2:1", type: "airline" },
+      { name: "Accor Live Limitless", ratio: "2:1", type: "hotel" },
+    ],
+    loungeAccess: "Unlimited worldwide (self + 1 guest) via Priority Pass",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "Air accident ₹3 Cr, Overseas medical $50,000",
+    concierge: true,
+    golfAccess: true,
+    bestFor: ["travel", "dining", "hotels", "premium-lifestyle"],
+    highlights: [
+      "Premium metal card, invite-only for HNIs",
+      "6 EP/₹200 on dining, travel, entertainment (3% effective)",
+      "Unlimited international lounge access for self + guest",
+      "Complimentary Taj Epicure membership & EazyDiner Prime",
+      "Forex markup lowered to 2%, travel & golf perks",
+    ],
+    applyUrl: "#affiliate-icici-emeralde-private-metal",
+    cardColor: "linear-gradient(135deg, #004d40 0%, #00695c 50%, #009688 100%)",
     textColor: "#ffffff",
   },
 
@@ -738,6 +1018,149 @@ const CARDS_DATABASE = [
     cardColor: "linear-gradient(135deg, #4a1942 0%, #6a1b4d 50%, #8e2157 100%)",
     textColor: "#ffffff",
   },
+  {
+    id: "axis-horizon",
+    name: "Axis Horizon Credit Card",
+    bank: "Axis Bank",
+    bankLogo: "🏛️",
+    network: "Visa Signature",
+    tier: "premium",
+    annualFee: 3000,
+    renewalFee: 3000,
+    feeWaiverSpend: 1000000,
+    joiningBonus: 5000,
+    joiningBonusUnit: "EDGE miles",
+    minIncome: 900000,
+    inviteOnly: false,
+    rewardRate: {
+      base: 2.0,
+      dining: 2.0,
+      travel: 10.0,
+      grocery: 2.0,
+      fuel: 2.0,
+      onlineShopping: 2.0,
+      utilities: 2.0,
+      entertainment: 2.0,
+    },
+    rewardUnit: "EDGE Miles (1 mile = ₹1 on Axis Travel Edge)",
+    transferPartners: [
+      { name: "Singapore Airlines KrisFlyer", ratio: "5:4", type: "airline" },
+      { name: "Air France/KLM Flying Blue", ratio: "5:4", type: "airline" },
+      { name: "Marriott Bonvoy", ratio: "5:4", type: "hotel" },
+      { name: "Accor Live Limitless", ratio: "5:2", type: "hotel" },
+      { name: "Etihad Guest", ratio: "5:4", type: "airline" },
+    ],
+    loungeAccess: "8 international + 32 domestic per year",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "Air accident ₹2.5 Cr, Overseas medical",
+    concierge: true,
+    golfAccess: true,
+    bestFor: ["travel", "airline-miles", "hotels"],
+    highlights: [
+      "5 EDGE miles per ₹100 on direct airline/hotel bookings (effective 5% travel)",
+      "10 EDGE miles per ₹100 on Axis Travel Edge portal",
+      "Best mid-tier travel card with strong airline transfer partners",
+      "8 international + 32 domestic lounge visits annually",
+      "Dedicated travel card with no forex surcharge hacks needed",
+    ],
+    applyUrl: "#affiliate-axis-horizon",
+    cardColor: "linear-gradient(135deg, #0f4c75 0%, #3282b8 50%, #bbe1fa 100%)",
+    textColor: "#ffffff",
+  },
+  {
+    id: "axis-cashback",
+    name: "Axis Bank Cashback Credit Card",
+    bank: "Axis Bank",
+    bankLogo: "🏛️",
+    network: "Visa",
+    tier: "entry",
+    annualFee: 500,
+    renewalFee: 500,
+    feeWaiverSpend: 200000,
+    joiningBonus: 500,
+    joiningBonusUnit: "cashback",
+    minIncome: 300000,
+    inviteOnly: false,
+    rewardRate: {
+      base: 1.5,
+      dining: 1.5,
+      travel: 1.5,
+      grocery: 1.5,
+      fuel: 1.5,
+      onlineShopping: 5.0,
+      utilities: 1.5,
+      entertainment: 1.5,
+    },
+    rewardUnit: "Cashback (direct statement credit)",
+    transferPartners: [],
+    loungeAccess: "None",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "None",
+    concierge: false,
+    golfAccess: false,
+    bestFor: ["online-shopping", "cashback", "everyday"],
+    highlights: [
+      "5% unlimited cashback on online shopping (Amazon, Flipkart, Myntra, etc.)",
+      "1.5% flat cashback on all other spends",
+      "Direct statement credit — no points to redeem",
+      "Low annual fee with easy waiver",
+      "Best entry-level cashback card for online shoppers",
+    ],
+    applyUrl: "#affiliate-axis-cashback",
+    cardColor: "linear-gradient(135deg, #97233f 0%, #b91d47 100%)",
+    textColor: "#ffffff",
+  },
+  {
+    id: "axis-magnus-burgundy",
+    name: "Axis Magnus for Burgundy",
+    bank: "Axis Bank",
+    bankLogo: "🏛️",
+    network: "Visa Infinite",
+    tier: "super-premium",
+    annualFee: 12500,
+    renewalFee: 12500,
+    feeWaiverSpend: null,
+    joiningBonus: 25000,
+    joiningBonusUnit: "EDGE points",
+    minIncome: 4000000,
+    inviteOnly: true,
+    rewardRate: {
+      base: 6.0,
+      dining: 6.0,
+      travel: 12.0,
+      grocery: 6.0,
+      fuel: 6.0,
+      onlineShopping: 6.0,
+      utilities: 6.0,
+      entertainment: 6.0,
+    },
+    rewardUnit: "EDGE Reward Points (1 EDGE pt = ₹1 on travel portal)",
+    transferPartners: [
+      { name: "Marriott Bonvoy", ratio: "2:1", type: "hotel" },
+      { name: "Singapore Airlines KrisFlyer", ratio: "2:1", type: "airline" },
+      { name: "Accor Live Limitless", ratio: "2:1", type: "hotel" },
+      { name: "Air France/KLM Flying Blue", ratio: "2:1", type: "airline" },
+      { name: "Turkish Airlines Miles&Smiles", ratio: "2:1", type: "airline" },
+      { name: "Qatar Airways Privilege Club", ratio: "2:1", type: "airline" },
+      { name: "ITC Hotels", ratio: "2:1", type: "hotel" },
+    ],
+    loungeAccess: "Unlimited domestic + international (Priority Pass self & guest)",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "Air accident ₹2.5 Cr, Overseas medical $100,000",
+    concierge: true,
+    golfAccess: true,
+    bestFor: ["travel", "hotels", "airline-miles", "premium-lifestyle"],
+    highlights: [
+      "12 EDGE points per ₹200 on travel portal (effective 6%+ travel)",
+      "Exclusive to Axis Burgundy Private/Select customers",
+      "Strongest transfer partner ecosystem in India (7 partners, mostly 2:1)",
+      "Unlimited lounge access worldwide with guest privilege",
+      "Dedicated Burgundy relationship manager & premium concierge",
+    ],
+    applyUrl: "#affiliate-axis-magnus-burgundy",
+    cardColor: "linear-gradient(135deg, #4a0e0e 0%, #6d1b1b 50%, #8b0000 100%)",
+    textColor: "#d4af37",
+  },
 
   // ──────────────────────────────────────────────────────────
   // HSBC CARDS
@@ -870,6 +1293,55 @@ const CARDS_DATABASE = [
     ],
     applyUrl: "#affiliate-hsbc-travelone",
     cardColor: "linear-gradient(135deg, #b71c1c 0%, #880e4f 100%)",
+    textColor: "#ffffff",
+  },
+  {
+    id: "hsbc-premier",
+    name: "HSBC Premier Credit Card",
+    bank: "HSBC",
+    bankLogo: "🔴",
+    network: "Mastercard World Elite",
+    tier: "super-premium",
+    annualFee: 0,
+    renewalFee: 0,
+    feeWaiverSpend: null,
+    joiningBonus: 12000,
+    joiningBonusUnit: "reward points",
+    minIncome: 4000000,
+    inviteOnly: true,
+    rewardRate: {
+      base: 3.0,
+      dining: 3.0,
+      travel: 3.0,
+      grocery: 3.0,
+      fuel: 3.0,
+      onlineShopping: 3.0,
+      utilities: 3.0,
+      entertainment: 3.0,
+    },
+    rewardUnit: "HSBC Reward Points (1 RP = ₹0.50)",
+    transferPartners: [
+      { name: "Singapore Airlines KrisFlyer", ratio: "3:1", type: "airline" },
+      { name: "Etihad Guest", ratio: "3:1", type: "airline" },
+      { name: "British Airways Avios", ratio: "3:1", type: "airline" },
+      { name: "Qatar Airways Privilege Club", ratio: "3:1", type: "airline" },
+      { name: "Cathay Pacific Asia Miles", ratio: "3:1", type: "airline" },
+    ],
+    loungeAccess: "Unlimited domestic & international (LoungeKey, self + guest)",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "Air accident ₹3 Cr, Overseas medical $250,000",
+    concierge: true,
+    golfAccess: true,
+    bestFor: ["travel", "international-spends", "premium-lifestyle", "hnw-banking"],
+    highlights: [
+      "Zero annual fee — exclusive to HSBC Premier banking clients",
+      "3 reward points per ₹100 on all spends (1.5% value)",
+      "Unlimited lounge access worldwide via LoungeKey",
+      "Forex markup just 0.99% — best-in-class for international spends",
+      "Mastercard World Elite privileges, global emergency assistance",
+    ],
+    applyUrl: "#affiliate-hsbc-premier",
+    cardColor: "linear-gradient(135deg, #c41e3a 0%, #6a1b9a 50%, #1a1a2e 100%)",
     textColor: "#ffffff",
   },
 
@@ -1271,21 +1743,169 @@ const CARDS_DATABASE = [
     cardColor: "linear-gradient(135deg, #d32f2f 0%, #f44336 50%, #ff5722 100%)",
     textColor: "#ffffff",
   },
+  {
+    id: "sbi-cashback",
+    name: "SBI Cashback Credit Card",
+    bank: "SBI Card",
+    bankLogo: "🟢",
+    network: "Visa",
+    tier: "mid",
+    annualFee: 999,
+    renewalFee: 999,
+    feeWaiverSpend: 200000,
+    joiningBonus: 0,
+    joiningBonusUnit: "",
+    minIncome: 360000,
+    inviteOnly: false,
+    rewardRate: {
+      base: 1.0,
+      dining: 1.0,
+      travel: 1.0,
+      grocery: 1.0,
+      fuel: 0,
+      onlineShopping: 5.0,
+      utilities: 1.0,
+      entertainment: 1.0,
+    },
+    rewardUnit: "Cashback (direct statement credit)",
+    transferPartners: [],
+    loungeAccess: "None",
+    fuelSurchargeWaiver: false,
+    insuranceCover: "None",
+    concierge: false,
+    golfAccess: false,
+    bestFor: ["online-shopping", "cashback"],
+    highlights: [
+      "Flat 5% cashback on all online spends (no merchant restrictions)",
+      "1% cashback on offline spends",
+      "Cashback capped at ₹5,000 per statement cycle",
+      "Auto-credited to statement within 2 days",
+      "Best no-fuss online cashback card in India",
+    ],
+    applyUrl: "#affiliate-sbi-cashback",
+    cardColor: "linear-gradient(135deg, #006064 0%, #00acc1 100%)",
+    textColor: "#ffffff",
+  },
+  {
+    id: "sbi-phonepe",
+    name: "SBI PhonePe Credit Card",
+    bank: "SBI Card",
+    bankLogo: "🟢",
+    network: "RuPay",
+    tier: "entry",
+    annualFee: 499,
+    renewalFee: 499,
+    feeWaiverSpend: 150000,
+    joiningBonus: 500,
+    joiningBonusUnit: "reward points",
+    minIncome: 300000,
+    inviteOnly: false,
+    rewardRate: {
+      base: 1.0,
+      dining: 2.0,
+      travel: 2.0,
+      grocery: 5.0,
+      fuel: 1.0,
+      onlineShopping: 5.0,
+      utilities: 5.0,
+      entertainment: 2.0,
+      phonepeApp: 5.0,
+    },
+    rewardUnit: "SBI Reward Points (1 RP = ₹0.25)",
+    transferPartners: [],
+    loungeAccess: "None",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "None",
+    concierge: false,
+    golfAccess: false,
+    bestFor: ["upi-payments", "utilities", "grocery"],
+    highlights: [
+      "5% rewards on PhonePe transactions — bill payments, recharges, shopping",
+      "RuPay card enables UPI via PhonePe — rare credit-on-UPI benefit",
+      "2% on dining & travel",
+      "Zero forex markup on PhonePe international merchant payments",
+      "Best UPI-linked credit card from SBI",
+    ],
+    applyUrl: "#affiliate-sbi-phonepe",
+    cardColor: "linear-gradient(135deg, #5f259f 0%, #311b92 100%)",
+    textColor: "#ffffff",
+  },
+  {
+    id: "sbi-tata-neu",
+    name: "SBI Tata Neu Infinity Credit Card",
+    bank: "SBI Card",
+    bankLogo: "🟢",
+    network: "Visa/RuPay",
+    tier: "premium",
+    annualFee: 1499,
+    renewalFee: 1499,
+    feeWaiverSpend: 300000,
+    joiningBonus: 1499,
+    joiningBonusUnit: "NeuCoins",
+    minIncome: 600000,
+    inviteOnly: false,
+    rewardRate: {
+      base: 1.5,
+      dining: 1.5,
+      travel: 1.5,
+      grocery: 1.5,
+      fuel: 1.5,
+      onlineShopping: 1.5,
+      utilities: 1.5,
+      entertainment: 1.5,
+      tataNeuApp: 5.0,
+      tataBrands: 5.0,
+    },
+    rewardUnit: "NeuCoins (1 NeuCoin = ₹1 in Tata ecosystem)",
+    transferPartners: [],
+    loungeAccess: "8 domestic + 4 international per year",
+    fuelSurchargeWaiver: true,
+    insuranceCover: "Air accident ₹50 Lakh",
+    concierge: false,
+    golfAccess: false,
+    bestFor: ["tata-ecosystem", "grocery", "online-shopping"],
+    highlights: [
+      "5% NeuCoins on Tata Neu App & Tata brands (BigBasket, Croma, AirAsia, Taj, 1mg, Westside)",
+      "1.5% NeuCoins on all other spends",
+      "RuPay variant unlocks UPI on credit",
+      "Airport lounge access (8 domestic + 4 international)",
+      "Alternative to HDFC Tata Neu for SBI preferring customers",
+    ],
+    applyUrl: "#affiliate-sbi-tata-neu",
+    cardColor: "linear-gradient(135deg, #1565c0 0%, #4b0082 50%, #6a0dad 100%)",
+    textColor: "#ffffff",
+  },
 ];
 
 // ============================================================
 // SECTION 2: SPENDING CATEGORIES DEFINITION
 // ============================================================
 
+// defaultFraction = typical monthly spend as share of monthly gross income
+// maxFraction     = upper bound of slider as share of monthly gross income
 const SPENDING_CATEGORIES = [
-  { id: "grocery", label: "Groceries & Supermarkets", icon: "🛒", placeholder: "e.g. 8000" },
-  { id: "dining", label: "Dining & Food Delivery", icon: "🍽️", placeholder: "e.g. 5000" },
-  { id: "fuel", label: "Fuel & Transportation", icon: "⛽", placeholder: "e.g. 4000" },
-  { id: "onlineShopping", label: "Online Shopping", icon: "🛍️", placeholder: "e.g. 10000" },
-  { id: "travel", label: "Travel (Flights & Hotels)", icon: "✈️", placeholder: "e.g. 15000" },
-  { id: "utilities", label: "Utility Bills & Recharges", icon: "💡", placeholder: "e.g. 5000" },
-  { id: "entertainment", label: "Entertainment & Movies", icon: "🎬", placeholder: "e.g. 3000" },
+  { id: "grocery",        label: "Groceries & Supermarkets",   icon: "🛒", defaultFraction: 0.12, maxFraction: 0.35 },
+  { id: "dining",         label: "Dining & Food Delivery",     icon: "🍽️", defaultFraction: 0.07, maxFraction: 0.25 },
+  { id: "fuel",           label: "Fuel & Transportation",      icon: "⛽", defaultFraction: 0.06, maxFraction: 0.20 },
+  { id: "onlineShopping", label: "Online Shopping",            icon: "🛍️", defaultFraction: 0.10, maxFraction: 0.35 },
+  { id: "travel",         label: "Travel (Flights & Hotels)",  icon: "✈️", defaultFraction: 0.08, maxFraction: 0.40 },
+  { id: "utilities",      label: "Utility Bills & Recharges",  icon: "💡", defaultFraction: 0.04, maxFraction: 0.15 },
+  { id: "entertainment",  label: "Entertainment & Movies",     icon: "🎬", defaultFraction: 0.03, maxFraction: 0.12 },
 ];
+
+// Slider step size scales with income band so users at higher incomes
+// aren't nudging ₹500 at a time on a ₹50k slider.
+function getSliderStep(monthlyIncome) {
+  if (monthlyIncome <= 50000) return 500;
+  if (monthlyIncome <= 100000) return 1000;
+  if (monthlyIncome <= 200000) return 2500;
+  return 5000;
+}
+
+// Round a value to the nearest step for clean slider positions.
+function roundToStep(value, step) {
+  return Math.round(value / step) * step;
+}
 
 const REWARD_GOALS = [
   { id: "cashback", label: "Direct Cashback", icon: "💰", description: "Get money back on every purchase" },
@@ -1307,6 +1927,325 @@ const INCOME_RANGES = [
   { value: 3000000, label: "₹30L - ₹50L" },
   { value: 5000000, label: "₹50L+" },
 ];
+
+// ============================================================
+// SECTION 2B: BANK REWARD PROGRAMS / ACCELERATOR PORTALS
+// Maps each bank to its proprietary portals where cardholders
+// earn accelerated/bonus points vs the base card reward rate.
+// Rendered inside the card detail modal.
+// ============================================================
+
+const REWARD_PORTALS_BY_BANK = {
+  "HDFC Bank": {
+    loyaltyProgram: "HDFC Reward Points (1 RP ≈ ₹0.30 standard; ₹1 via SmartBuy)",
+    portals: [
+      {
+        name: "HDFC SmartBuy",
+        url: "smartbuy.hdfcbank.com",
+        boost: "Up to 10x reward points",
+        description:
+          "Flagship accelerator portal. 10x on Amazon, Flipkart, Marriott, Cleartrip, Yatra, MakeMyTrip and partner gift cards. Best value redemption at 1 RP = ₹1 on flights/hotels.",
+        applicableTiers: ["super-premium", "premium"],
+        applicableCards: ["Infinia", "Diners Black", "Diners Black Metal", "Regalia Gold", "Regalia"],
+        portalMultipliers: { travel: 5, onlineShopping: 10, grocery: 5 },
+      },
+      {
+        name: "HDFC Gift Card Portal (via SmartBuy)",
+        url: "smartbuy.hdfcbank.com/giftcards",
+        boost: "Up to 10x on gift cards",
+        description:
+          "Buy Amazon, Flipkart, Myntra, Tanishq, BigBasket, MMT gift cards with 10x RP multiplier. Effectively 33% return on premium cards.",
+        applicableTiers: ["super-premium", "premium"],
+        portalMultipliers: { onlineShopping: 10 },
+      },
+      {
+        name: "HDFC PayZapp",
+        url: "payzapp.hdfcbank.com",
+        boost: "5%-10% cashback offers",
+        description:
+          "In-house payment wallet with rotating cashback offers on bill payments, recharges & partner merchants. Available to all HDFC cardholders.",
+        applicableTiers: ["all"],
+        portalMultipliers: { utilities: 2 },
+      },
+      {
+        name: "HDFC Dineout Passport",
+        url: "dineout.co.in",
+        boost: "Up to 50% off dining",
+        description:
+          "Complimentary Dineout Passport membership on Infinia/Diners Black — up to 50% off across 7,000+ restaurants.",
+        applicableTiers: ["super-premium", "premium"],
+        // Dineout is a discount, not a reward multiplier — no portalMultipliers.
+      },
+    ],
+  },
+  "Axis Bank": {
+    loyaltyProgram: "Axis EDGE Rewards (EDGE Points & EDGE Miles)",
+    portals: [
+      {
+        name: "Axis Travel Edge",
+        url: "traveledge.axisbank.com",
+        boost: "Up to 12x EDGE Miles",
+        description:
+          "Dedicated travel portal for Axis cardholders. Accelerated miles on flight & hotel bookings. Magnus/Reserve earn 10x–12x miles here; Horizon earns 10x.",
+        applicableTiers: ["super-premium", "premium"],
+        applicableCards: ["Magnus", "Reserve", "Horizon", "Magnus Burgundy"],
+        portalMultipliers: { travel: 10 },
+      },
+      {
+        name: "Axis Gift Edge",
+        url: "giftedge.axisbank.com",
+        boost: "5x–10x EDGE points on gift cards",
+        description:
+          "Gift card marketplace: Amazon, Flipkart, Croma, Shoppers Stop, etc. Accelerated EDGE points multiplier varies by card tier.",
+        applicableTiers: ["super-premium", "premium", "mid"],
+        portalMultipliers: { onlineShopping: 5 },
+      },
+      {
+        name: "Axis Grab Deals",
+        url: "grabdeals.axisbank.com",
+        boost: "Merchant discounts + bonus EDGE points",
+        description:
+          "Rotating merchant offers with stacked discounts and bonus points across lifestyle, fashion, electronics categories.",
+        applicableTiers: ["all"],
+        portalMultipliers: { onlineShopping: 2, entertainment: 2 },
+      },
+      {
+        name: "Axis Dining Delights",
+        url: "axisbank.com/dining-delights",
+        boost: "15-20% off at 4,000+ restaurants",
+        description:
+          "In-built dining program — no separate membership required. Works across partner restaurants nationwide.",
+        applicableTiers: ["all"],
+        // Discount program, not a points accelerator.
+      },
+    ],
+  },
+  "ICICI Bank": {
+    loyaltyProgram: "ICICI Reward Points / Emeralde Points (1 RP ≈ ₹0.25; 1 EP = ₹1)",
+    portals: [
+      {
+        name: "ICICI iShop (Rewards Catalogue)",
+        url: "icicibank.com/rewards/ishop",
+        boost: "Merchandise, gift cards, flight/hotel vouchers",
+        description:
+          "Central redemption portal. Redeem points for Amazon/Flipkart gift cards, electronics, travel vouchers, and statement credits.",
+        applicableTiers: ["all"],
+        // Redemption portal only — no spend-side accelerator.
+      },
+      {
+        name: "ICICI Culinary Treats",
+        url: "culinarytreats.icicibank.com",
+        boost: "Up to 25% off at 2,500+ restaurants",
+        description:
+          "Signature dining program — flat discounts plus reward point accelerators at partner restaurants.",
+        applicableTiers: ["all"],
+        portalMultipliers: { dining: 2 },
+      },
+      {
+        name: "ICICI Travel Portal (powered by EazeMyTrip)",
+        url: "travel.icicibank.com",
+        boost: "Bonus reward points on bookings",
+        description:
+          "Accelerated points on flight and hotel bookings for Emeralde, Sapphiro and Times Black cardholders.",
+        applicableTiers: ["super-premium", "premium"],
+        portalMultipliers: { travel: 5 },
+      },
+      {
+        name: "ICICI Rewards Hub (iMobile App)",
+        url: "iMobile Pay app",
+        boost: "3x points on app-initiated transactions",
+        description:
+          "Select cards earn 3x on spends booked via iMobile Pay + exclusive gift card redemption rates.",
+        applicableTiers: ["all"],
+        portalMultipliers: { utilities: 3, onlineShopping: 3 },
+      },
+    ],
+  },
+  "HSBC": {
+    loyaltyProgram: "HSBC Reward Points (1 RP ≈ ₹0.25–₹0.50 via catalogue)",
+    portals: [
+      {
+        name: "HSBC Rewards Catalogue",
+        url: "hsbc.co.in/credit-cards/rewards",
+        boost: "Gift cards, merchandise, miles conversion",
+        description:
+          "Redeem points for Amazon/Flipkart gift cards, travel vouchers, or transfer to partner airlines (KrisFlyer, Avios, Etihad Guest).",
+        applicableTiers: ["all"],
+      },
+      {
+        name: "HSBC Shop & Earn",
+        url: "hsbc.co.in/offers",
+        boost: "5%-15% discount + bonus points",
+        description:
+          "Curated merchant offers across travel, dining, lifestyle and e-commerce. Stackable with base card rewards.",
+        applicableTiers: ["all"],
+        portalMultipliers: { travel: 2, dining: 2, onlineShopping: 2 },
+      },
+      {
+        name: "HSBC Premier Global Privileges",
+        url: "hsbcpremier.com",
+        boost: "Global concierge + complimentary upgrades",
+        description:
+          "Premier-only — lounge upgrades, hotel status matches (Marriott Gold via Mastercard), priority Visa/Mastercard concierge worldwide.",
+        applicableTiers: ["super-premium"],
+        applicableCards: ["Premier"],
+      },
+    ],
+  },
+  "Bank of Baroda": {
+    loyaltyProgram: "BOB Reward Points (1 RP ≈ ₹0.25)",
+    portals: [
+      {
+        name: "BOB Rewardz (bobfinancial.com)",
+        url: "rewards.bobfinancial.com",
+        boost: "Gift cards, vouchers, cashback redemption",
+        description:
+          "BOB Financial's redemption portal — convert points to Amazon/Flipkart/Croma vouchers, statement credit, or merchandise.",
+        applicableTiers: ["all"],
+      },
+      {
+        name: "BOB ePay Gift Voucher Store",
+        url: "bobfinancial.com/epay",
+        boost: "5x points on select vouchers",
+        description:
+          "Gift voucher marketplace with periodic 5x accelerator on travel and lifestyle brands.",
+        applicableTiers: ["premium", "mid"],
+        portalMultipliers: { travel: 5, onlineShopping: 5 },
+      },
+      {
+        name: "BOB Card Offers (Visa/Mastercard)",
+        url: "bobfinancial.com/offers",
+        boost: "Merchant discounts + bonus reward points",
+        description:
+          "Network-partnered offers across dining, travel & e-commerce (Visa Signature/Mastercard World privileges).",
+        applicableTiers: ["all"],
+        portalMultipliers: { dining: 2, travel: 2 },
+      },
+    ],
+  },
+  "SBI Card": {
+    loyaltyProgram: "SBI Reward Points (1 RP = ₹0.25 on catalogue; cashback varies)",
+    portals: [
+      {
+        name: "SBI Card Shop & Smile",
+        url: "sbirewardz.com",
+        boost: "Gift cards, merchandise, flight vouchers",
+        description:
+          "Core redemption portal — redeem SBI reward points for Amazon/Flipkart gift cards, travel vouchers, and product catalogue at 1 RP = ₹0.25.",
+        applicableTiers: ["all"],
+      },
+      {
+        name: "SBI Card SimplyCLICK Accelerator",
+        url: "sbicard.com/simplyclick-partners",
+        boost: "10x rewards on partner e-commerce",
+        description:
+          "10x reward points on Amazon, BookMyShow, Cleartrip, Lenskart, Netmeds, Apollo 24|7, Yatra. Exclusive to SimplyCLICK cardholders.",
+        applicableTiers: ["entry"],
+        applicableCards: ["SimplyCLICK"],
+        portalMultipliers: { onlineShopping: 10, entertainment: 10 },
+      },
+      {
+        name: "SBI Card Dining — Visa Dining Passport",
+        url: "sbicard.com/dining",
+        boost: "15-25% off at partner restaurants",
+        description:
+          "Complimentary Visa/Mastercard dining privileges on premium SBI cards (Elite, Prime) — flat discounts at curated restaurants.",
+        applicableTiers: ["premium", "mid"],
+      },
+      {
+        name: "SBI Card Flight Booking Portal",
+        url: "sbicardrewards.com/flights",
+        boost: "Flight vouchers at bonus redemption value",
+        description:
+          "Use points to book flights at preferential redemption rates, available to Elite and Prime cardholders.",
+        applicableTiers: ["premium"],
+        portalMultipliers: { travel: 3 },
+      },
+      {
+        name: "Tata Neu App (for Tata Neu co-branded card)",
+        url: "tataneu.com",
+        boost: "5% NeuCoins on Tata brands",
+        description:
+          "Co-branded accelerator: 5% NeuCoins when paying via Tata Neu App on BigBasket, Croma, AirAsia, Taj, 1mg, Westside.",
+        applicableTiers: ["premium"],
+        applicableCards: ["Tata Neu"],
+        portalMultipliers: { onlineShopping: 3, grocery: 3 },
+      },
+    ],
+  },
+};
+
+// Realistic share of spend in each category that can be routed through a
+// bank's accelerator portal (gift cards, travel portals, UPI apps, etc.).
+// Fuel can't be routed (no portal supports fuel pumps); online shopping
+// can largely be routed via gift cards bought on SmartBuy/Gift Edge.
+const PORTAL_UTILIZATION = {
+  grocery: 0.40,        // BigBasket + partner gift cards; physical mart can't
+  dining: 0.25,         // partner-restaurant bookings only
+  fuel: 0.0,            // no portal covers fuel pumps
+  onlineShopping: 0.80, // gift-card routing covers Amazon/Flipkart/Myntra
+  travel: 0.60,         // portal bookings for flights/hotels; direct bookings don't
+  utilities: 0.50,      // PayZapp / iMobile Pay / PhonePe coverage
+  entertainment: 0.40,  // BookMyShow via gift cards; direct tickets don't
+};
+
+// Compute the effective reward rate for a card+category, blending the base
+// rate with the best portal-boosted rate weighted by realistic utilization.
+// Returns { baseRate, boostedRate, effectiveRate, portalUsed, multiplier, utilization }.
+function computeEffectiveRate(card, categoryId) {
+  const baseRate = card.rewardRate[categoryId] ?? card.rewardRate.base ?? 0;
+  const accelerators = getCategoryAccelerators(card, categoryId);
+  if (accelerators.length === 0) {
+    return { baseRate, boostedRate: baseRate, effectiveRate: baseRate, portalUsed: null, multiplier: 1, utilization: 0 };
+  }
+  const best = accelerators[0];
+  const util = PORTAL_UTILIZATION[categoryId] ?? 0;
+  const effectiveRate = util * best.boostedRate + (1 - util) * baseRate;
+  return {
+    baseRate,
+    boostedRate: best.boostedRate,
+    effectiveRate: +effectiveRate.toFixed(2),
+    portalUsed: best.portalName,
+    multiplier: best.multiplier,
+    utilization: util,
+  };
+}
+
+// Returns all applicable portals for a given card — matches by bank, tier,
+// and card-name inclusion list. Used to filter which portals appear for a card.
+function getApplicablePortals(card) {
+  const bankProgram = REWARD_PORTALS_BY_BANK[card.bank];
+  if (!bankProgram) return [];
+  return bankProgram.portals.filter((p) => {
+    if (p.applicableCards) {
+      return p.applicableCards.some((n) => card.name.toLowerCase().includes(n.toLowerCase()));
+    }
+    if (p.applicableTiers) {
+      return p.applicableTiers.includes("all") || p.applicableTiers.includes(card.tier);
+    }
+    return true;
+  });
+}
+
+// For a given card and spending category, return all applicable portal boosts
+// e.g. { portal: "HDFC SmartBuy", multiplier: 5, baseRate: 3.3, boostedRate: 16.5 }
+// sorted by boostedRate descending.
+function getCategoryAccelerators(card, categoryId) {
+  const baseRate = card.rewardRate[categoryId] ?? card.rewardRate.base ?? 0;
+  return getApplicablePortals(card)
+    .filter((p) => p.portalMultipliers && p.portalMultipliers[categoryId])
+    .map((p) => {
+      const multiplier = p.portalMultipliers[categoryId];
+      return {
+        portal: p.portal || p.name,
+        portalName: p.name,
+        multiplier,
+        baseRate,
+        boostedRate: +(baseRate * multiplier).toFixed(2),
+      };
+    })
+    .sort((a, b) => b.boostedRate - a.boostedRate);
+}
 
 // ============================================================
 // SECTION 3: RECOMMENDATION ENGINE
@@ -1336,15 +2275,34 @@ class RecommendationEngine {
     const breakdown = {};
 
     // 1. Reward value calculation (40% weight)
+    // For each category, blend the base reward rate with the best portal-boosted
+    // rate weighted by realistic portal utilization for that category.
     SPENDING_CATEGORIES.forEach((cat) => {
       const monthlySpend = this.profile.spending[cat.id] || 0;
       const annualCategorySpend = monthlySpend * 12;
-      const rewardRate = card.rewardRate[cat.id] || card.rewardRate.base || 0;
-      const categoryRewardValue = (annualCategorySpend * rewardRate) / 100;
+      const eff = computeEffectiveRate(card, cat.id);
+
+      // Split annual spend into routed-via-portal vs direct to show a clean
+      // breakdown in the UI. util × spend earns boosted rate, rest earns base.
+      const routedSpend = Math.round(annualCategorySpend * eff.utilization);
+      const directSpend = annualCategorySpend - routedSpend;
+      const routedValue = (routedSpend * eff.boostedRate) / 100;
+      const directValue = (directSpend * eff.baseRate) / 100;
+      const categoryRewardValue = routedValue + directValue;
+
       annualRewardValue += categoryRewardValue;
       breakdown[cat.id] = {
         spend: annualCategorySpend,
-        rate: rewardRate,
+        rate: eff.effectiveRate,       // blended effective % used in calc
+        baseRate: eff.baseRate,
+        boostedRate: eff.boostedRate,
+        multiplier: eff.multiplier,
+        portalUsed: eff.portalUsed,
+        utilization: eff.utilization,
+        routedSpend,
+        directSpend,
+        routedValue,
+        directValue,
         value: categoryRewardValue,
       };
     });
@@ -1596,16 +2554,24 @@ class CardSuggestApp {
               <h2>Your Monthly Spending</h2>
               <p>Approximate monthly spend in each category (in ₹)</p>
             </div>
+            <p class="spending-hint" id="spending-hint">
+              Sliders are pre-filled with typical amounts for your income band — drag to adjust.
+            </p>
             <div class="spending-grid">
               ${SPENDING_CATEGORIES.map(
                 (cat) => `
                 <div class="spending-card">
-                  <div class="spending-icon">${cat.icon}</div>
-                  <label class="spending-label">${cat.label}</label>
-                  <div class="input-wrapper">
-                    <span class="input-prefix">₹</span>
-                    <input type="number" class="spending-input" id="spend-${cat.id}"
-                           placeholder="${cat.placeholder}" min="0" step="500">
+                  <div class="spending-row">
+                    <div class="spending-icon">${cat.icon}</div>
+                    <label class="spending-label" for="spend-${cat.id}">${cat.label}</label>
+                    <div class="spending-value"><span class="input-prefix">₹</span><span id="spend-val-${cat.id}">0</span><span class="spending-period">/mo</span></div>
+                  </div>
+                  <input type="range" class="spending-input" id="spend-${cat.id}"
+                         min="0" max="100000" step="500" value="0"
+                         aria-label="${cat.label} monthly spend">
+                  <div class="slider-scale">
+                    <span id="spend-min-${cat.id}">₹0</span>
+                    <span id="spend-max-${cat.id}">₹1L</span>
                   </div>
                 </div>
               `
@@ -1704,6 +2670,7 @@ class CardSuggestApp {
         btn.classList.add("selected");
         this.userProfile.income = parseInt(btn.dataset.value);
         document.getElementById("btn-next-1").disabled = false;
+        this.scaleSpendingSliders();
       });
     });
 
@@ -1716,9 +2683,13 @@ class CardSuggestApp {
       });
     });
 
-    // Spending inputs
+    // Spending sliders
     document.querySelectorAll(".spending-input").forEach((input) => {
-      input.addEventListener("input", () => {
+      input.addEventListener("input", (e) => {
+        const id = e.target.id.replace("spend-", "");
+        const display = document.getElementById(`spend-val-${id}`);
+        if (display) display.textContent = parseInt(e.target.value).toLocaleString("en-IN");
+        this.updateSliderFill(e.target);
         this.updateTotalSpend();
       });
     });
@@ -1787,6 +2758,47 @@ class CardSuggestApp {
       total += val;
     });
     document.getElementById("total-spend").textContent = `₹${total.toLocaleString("en-IN")}`;
+  }
+
+  // Paint the progress fill on a range input (for --fill CSS var).
+  updateSliderFill(slider) {
+    const min = parseFloat(slider.min) || 0;
+    const max = parseFloat(slider.max) || 1;
+    const val = parseFloat(slider.value) || 0;
+    const pct = max > min ? ((val - min) / (max - min)) * 100 : 0;
+    slider.style.setProperty("--fill", `${pct}%`);
+  }
+
+  // Rescale each spending slider so min/max/step/default are proportional
+  // to the user's selected income band. Called whenever income changes.
+  scaleSpendingSliders() {
+    const annualIncome = this.userProfile.income;
+    if (!annualIncome) return;
+    const monthlyIncome = annualIncome / 12;
+    const step = getSliderStep(monthlyIncome);
+
+    SPENDING_CATEGORIES.forEach((cat) => {
+      const slider = document.getElementById(`spend-${cat.id}`);
+      if (!slider) return;
+      const defaultVal = roundToStep(monthlyIncome * cat.defaultFraction, step);
+      const maxVal = Math.max(step * 4, roundToStep(monthlyIncome * cat.maxFraction, step));
+
+      slider.min = 0;
+      slider.max = maxVal;
+      slider.step = step;
+      slider.value = defaultVal;
+      this.updateSliderFill(slider);
+
+      const valEl = document.getElementById(`spend-val-${cat.id}`);
+      if (valEl) valEl.textContent = defaultVal.toLocaleString("en-IN");
+
+      const maxEl = document.getElementById(`spend-max-${cat.id}`);
+      if (maxEl) maxEl.textContent = maxVal >= 100000
+        ? `₹${(maxVal / 100000).toFixed(1).replace(/\.0$/, "")}L`
+        : `₹${(maxVal / 1000).toFixed(0)}k`;
+    });
+
+    this.updateTotalSpend();
   }
 
   collectSpending() {
@@ -1935,31 +2947,101 @@ class CardSuggestApp {
 
         <div class="detail-section">
           <h3>⭐ Reward Rates</h3>
-          <table class="detail-table">
-            ${SPENDING_CATEGORIES.map(
-              (cat) => `
+          <p class="rate-legend">Base rate shown first. If a reward portal accelerates that category, the boosted rate is shown next to it.</p>
+          <table class="detail-table rate-table">
+            <thead>
+              <tr><th>Category</th><th>Base rate</th><th>Via accelerator portal</th></tr>
+            </thead>
+            <tbody>
+            ${SPENDING_CATEGORIES.map((cat) => {
+              const baseRate = card.rewardRate[cat.id] ?? card.rewardRate.base ?? 0;
+              const accelerators = getCategoryAccelerators(card, cat.id);
+              const best = accelerators[0];
+              return `
               <tr>
                 <td>${cat.icon} ${cat.label}</td>
-                <td class="rate-cell">${card.rewardRate[cat.id] || card.rewardRate.base}%</td>
+                <td class="rate-cell">${baseRate}%</td>
+                <td class="rate-boost-cell">
+                  ${
+                    best
+                      ? `<span class="rate-boost-badge">${best.multiplier}x</span>
+                         <strong>${best.boostedRate}%</strong>
+                         <div class="rate-boost-via">via ${best.portalName}${
+                           accelerators.length > 1
+                             ? ` <span class="rate-alt">(+${accelerators.length - 1} more)</span>`
+                             : ""
+                         }</div>`
+                      : `<span class="rate-no-boost">—</span>`
+                  }
+                </td>
               </tr>
-            `
-            ).join("")}
+            `;
+            }).join("")}
+            </tbody>
           </table>
         </div>
 
         <div class="detail-section">
           <h3>📊 Your Estimated Rewards Breakdown</h3>
-          <table class="detail-table">
+          <p class="rate-legend">Value blends portal-routed spend (boosted rate) and direct spend (base rate), using a realistic utilization estimate per category.</p>
+          <table class="detail-table breakdown-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Spend & calculation</th>
+                <th>Annual value</th>
+              </tr>
+            </thead>
             ${SPENDING_CATEGORIES.map((cat) => {
               const b = rec.breakdown[cat.id];
-              return b && b.spend > 0
-                ? `<tr>
+              if (!b || b.spend <= 0) return "";
+              const hasPortal = b.portalUsed && b.utilization > 0 && b.multiplier > 1;
+              const calcCell = hasPortal
+                ? `<div class="calc-line"><span class="calc-portal-pill">via ${b.portalUsed}</span></div>
+                   <div class="calc-line">
+                     ₹${b.routedSpend.toLocaleString("en-IN")} × ${b.boostedRate}%
+                     <span class="calc-note">(${Math.round(b.utilization * 100)}% routed, ${b.multiplier}x boosted)</span>
+                     = <strong>₹${Math.round(b.routedValue).toLocaleString("en-IN")}</strong>
+                   </div>
+                   <div class="calc-line">
+                     ₹${b.directSpend.toLocaleString("en-IN")} × ${b.baseRate}%
+                     <span class="calc-note">(direct, base)</span>
+                     = <strong>₹${Math.round(b.directValue).toLocaleString("en-IN")}</strong>
+                   </div>
+                   <div class="calc-line calc-effective">
+                     Effective rate: <strong>${b.rate}%</strong>
+                   </div>`
+                : `₹${b.spend.toLocaleString("en-IN")} × ${b.rate}%`;
+              return `<tr>
                     <td>${cat.icon} ${cat.label}</td>
-                    <td>₹${b.spend.toLocaleString("en-IN")} × ${b.rate}%</td>
+                    <td class="calc-cell">${calcCell}</td>
                     <td class="value-cell">₹${Math.round(b.value).toLocaleString("en-IN")}</td>
                   </tr>`
                 : "";
             }).join("")}
+            ${(() => {
+              // Compute what the user would earn without using any portal —
+              // for transparency, so they can see the portal uplift.
+              const baseOnly = SPENDING_CATEGORIES.reduce((sum, cat) => {
+                const b = rec.breakdown[cat.id];
+                return b ? sum + (b.spend * b.baseRate) / 100 : sum;
+              }, 0);
+              const portalUplift = Math.round(rec.annualRewardValue - baseOnly);
+              return `
+              <tr class="baseline-row">
+                <td>If you don't use portals (base rates only)</td>
+                <td class="calc-note">Hypothetical floor</td>
+                <td class="value-cell">₹${Math.round(baseOnly).toLocaleString("en-IN")}</td>
+              </tr>
+              ${portalUplift > 0 ? `
+              <tr class="uplift-row">
+                <td>↑ Uplift from accelerated portals</td>
+                <td class="calc-note">Blended portal boost</td>
+                <td class="value-cell uplift-val">+₹${portalUplift.toLocaleString("en-IN")}</td>
+              </tr>
+              ` : ""}
+              `;
+            })()}
             <tr class="total-row">
               <td><strong>Total Annual Reward Value</strong></td>
               <td></td>
@@ -2004,6 +3086,60 @@ class CardSuggestApp {
         `
             : ""
         }
+
+        ${(() => {
+          const bankProgram = REWARD_PORTALS_BY_BANK[card.bank];
+          if (!bankProgram) return "";
+          const applicable = getApplicablePortals(card);
+          if (applicable.length === 0) return "";
+          return `
+          <div class="detail-section">
+            <h3>🎁 Accelerated Reward Portals</h3>
+            <p class="program-loyalty"><strong>Loyalty program:</strong> ${bankProgram.loyaltyProgram}</p>
+            <div class="portal-grid">
+              ${applicable
+                .map((p) => {
+                  // Map portal's per-category multipliers to boosted rates for this card.
+                  const multiplierRows = p.portalMultipliers
+                    ? Object.entries(p.portalMultipliers)
+                        .map(([catId, mult]) => {
+                          const cat = SPENDING_CATEGORIES.find((c) => c.id === catId);
+                          if (!cat) return "";
+                          const baseRate = card.rewardRate[catId] ?? card.rewardRate.base ?? 0;
+                          const boosted = +(baseRate * mult).toFixed(2);
+                          return `
+                            <div class="portal-rate-row">
+                              <span>${cat.icon} ${cat.label}</span>
+                              <span class="portal-rate-calc">${baseRate}% × ${mult} = <strong>${boosted}%</strong></span>
+                            </div>
+                          `;
+                        })
+                        .join("")
+                    : "";
+                  return `
+                <div class="portal-card">
+                  <div class="portal-header">
+                    <span class="portal-name">${p.name}</span>
+                    <span class="portal-boost">${p.boost}</span>
+                  </div>
+                  <p class="portal-desc">${p.description}</p>
+                  ${
+                    multiplierRows
+                      ? `<div class="portal-rates">
+                           <div class="portal-rates-label">Boosted earn rate when spending via this portal:</div>
+                           ${multiplierRows}
+                         </div>`
+                      : ""
+                  }
+                  <span class="portal-url">🔗 ${p.url}</span>
+                </div>
+              `;
+                })
+                .join("")}
+            </div>
+          </div>
+          `;
+        })()}
 
         <div class="detail-section">
           <h3>🎯 Key Benefits</h3>
@@ -2082,7 +3218,20 @@ class CardSuggestApp {
       b.classList.remove("active");
       if (b.dataset.value === "salaried") b.classList.add("active");
     });
-    document.querySelectorAll(".spending-input").forEach((i) => (i.value = ""));
+    // Reset sliders to 0 and clear their displayed values
+    document.querySelectorAll(".spending-input").forEach((i) => {
+      i.min = 0;
+      i.max = 100000;
+      i.step = 500;
+      i.value = 0;
+      i.style.setProperty("--fill", "0%");
+    });
+    SPENDING_CATEGORIES.forEach((cat) => {
+      const v = document.getElementById(`spend-val-${cat.id}`);
+      if (v) v.textContent = "0";
+      const m = document.getElementById(`spend-max-${cat.id}`);
+      if (m) m.textContent = "₹1L";
+    });
     document.querySelectorAll(".goal-card").forEach((c) => c.classList.remove("selected"));
     document.getElementById("total-spend").textContent = "₹0";
     document.getElementById("goals-count").textContent = "0";
