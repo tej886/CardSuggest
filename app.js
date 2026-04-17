@@ -3016,8 +3016,7 @@ class CardSuggestApp {
                     <td>${cat.icon} ${cat.label}</td>
                     <td class="calc-cell">${calcCell}</td>
                     <td class="value-cell">₹${Math.round(b.value).toLocaleString("en-IN")}</td>
-                  </tr>`
-                : "";
+                  </tr>`;
             }).join("")}
             ${(() => {
               // Compute what the user would earn without using any portal —
