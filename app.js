@@ -1,5 +1,5 @@
 // ============================================================
-// CardSuggest India - Credit Card Recommendation Engine
+// CARDO — Master Advisor for Indian credit card strategy
 // Complete card database + recommendation algorithm + UI logic
 // ============================================================
 
@@ -2434,7 +2434,7 @@ class RecommendationEngine {
 // SECTION 4: UI APPLICATION CONTROLLER
 // ============================================================
 
-class CardSuggestApp {
+class CardoApp {
   constructor() {
     this.currentStep = 1;
     this.totalSteps = 4;
@@ -2462,10 +2462,12 @@ class CardSuggestApp {
         <div class="container">
           <div class="header-content">
             <div class="logo">
-              <span class="logo-icon">💳</span>
-              <span class="logo-text">CardSuggest<span class="logo-dot">.</span>in</span>
+              <div>
+                <span class="logo-text">CARD<span class="logo-dot">·</span>O</span>
+                <span class="logo-tag">Master Advisor</span>
+              </div>
             </div>
-            <div class="header-tagline">India's Smartest Credit Card Advisor</div>
+            <div class="header-tagline">The CARDO Analysis · Optimized Yield · Ecosystem Mapping</div>
           </div>
         </div>
       </header>
@@ -2473,17 +2475,18 @@ class CardSuggestApp {
       <!-- HERO -->
       <section class="hero" id="hero">
         <div class="container">
-          <h1>Find Your Perfect Credit Card</h1>
-          <p class="hero-sub">Answer a few questions about your income, spending habits, and goals — we'll recommend the best credit cards from HDFC, ICICI, Axis, HSBC, BOB & SBI.</p>
+          <span class="hero-eyebrow">The Master Advisor</span>
+          <h1>A <span class="gold">bespoke</span> credit card strategy,<br>engineered for your spend.</h1>
+          <p class="hero-sub">CARDO reads your profile, maps your spending, and audits every card across HDFC, ICICI, Axis, HSBC, Bank of Baroda &amp; SBI — returning a single precise verdict: the card that maximizes your <em>Optimized Yield</em>.</p>
           <button class="btn-primary btn-large" id="btn-start">
-            Get Started — It's Free
+            Begin the CARDO Analysis
             <span class="btn-arrow">→</span>
           </button>
           <div class="trust-badges">
-            <div class="badge">🏦 6 Major Banks</div>
-            <div class="badge">💳 30+ Cards</div>
-            <div class="badge">🎯 Personalized</div>
-            <div class="badge">🔒 No Data Stored</div>
+            <div class="badge">6 Major Banks</div>
+            <div class="badge">41 Card Instruments</div>
+            <div class="badge">Portal-Level Yield</div>
+            <div class="badge">Zero Data Retention</div>
           </div>
         </div>
       </section>
@@ -2519,8 +2522,9 @@ class CardSuggestApp {
           <!-- Step 1: Profile -->
           <div class="step-panel" id="step-1">
             <div class="step-header">
-              <h2>Tell us about yourself</h2>
-              <p>This helps us find cards you're eligible for</p>
+              <span class="step-eyebrow">Chapter I · Financial Profile</span>
+              <h2>The Client Dossier</h2>
+              <p>A discreet audit of your standing — the foundation of every CARDO Analysis.</p>
             </div>
             <div class="form-group">
               <label class="form-label">Annual Income (Gross)</label>
@@ -2544,18 +2548,19 @@ class CardSuggestApp {
             </div>
             <div class="step-actions">
               <button class="btn-secondary" id="btn-back-1" style="visibility:hidden;">← Back</button>
-              <button class="btn-primary" id="btn-next-1" disabled>Continue →</button>
+              <button class="btn-primary" id="btn-next-1" disabled>Proceed →</button>
             </div>
           </div>
 
           <!-- Step 2: Spending -->
           <div class="step-panel" id="step-2" style="display:none;">
             <div class="step-header">
-              <h2>Your Monthly Spending</h2>
-              <p>Approximate monthly spend in each category (in ₹)</p>
+              <span class="step-eyebrow">Chapter II · Spend Criteria</span>
+              <h2>Ecosystem Mapping</h2>
+              <p>Calibrate monthly outlay across each category — CARDO models yield against the real shape of your spend.</p>
             </div>
             <p class="spending-hint" id="spending-hint">
-              Sliders are pre-filled with typical amounts for your income band — drag to adjust.
+              Sliders are pre-calibrated to your income band. Refine each figure for a precise Optimized Yield.
             </p>
             <div class="spending-grid">
               ${SPENDING_CATEGORIES.map(
@@ -2578,20 +2583,21 @@ class CardSuggestApp {
               ).join("")}
             </div>
             <div class="spend-summary" id="spend-summary">
-              <span>Total Monthly Spend: </span>
+              <span>Aggregate Monthly Outlay · </span>
               <strong id="total-spend">₹0</strong>
             </div>
             <div class="step-actions">
               <button class="btn-secondary" id="btn-back-2">← Back</button>
-              <button class="btn-primary" id="btn-next-2">Continue →</button>
+              <button class="btn-primary" id="btn-next-2">Proceed →</button>
             </div>
           </div>
 
           <!-- Step 3: Goals -->
           <div class="step-panel" id="step-3" style="display:none;">
             <div class="step-header">
-              <h2>What matters most to you?</h2>
-              <p>Select your top reward preferences (pick up to 3)</p>
+              <span class="step-eyebrow">Chapter III · Strategic Mandate</span>
+              <h2>Your Reward Doctrine</h2>
+              <p>Select up to three priorities. CARDO weighs every recommendation against your mandate.</p>
             </div>
             <div class="goals-grid">
               ${REWARD_GOALS.map(
@@ -2610,20 +2616,21 @@ class CardSuggestApp {
             </div>
             <div class="step-actions">
               <button class="btn-secondary" id="btn-back-3">← Back</button>
-              <button class="btn-primary" id="btn-next-3" disabled>Show My Cards →</button>
+              <button class="btn-primary" id="btn-next-3" disabled>Reveal My Strategy →</button>
             </div>
           </div>
 
           <!-- Step 4: Results -->
           <div class="step-panel" id="step-4" style="display:none;">
             <div class="step-header">
-              <h2>Your Personalized Recommendations</h2>
+              <span class="step-eyebrow">Chapter IV · Bespoke Financial Strategy</span>
+              <h2>The CARDO Analysis</h2>
               <p id="results-subtitle"></p>
             </div>
             <div class="results-summary" id="results-summary"></div>
             <div class="results-grid" id="results-grid"></div>
             <div class="step-actions">
-              <button class="btn-secondary" id="btn-back-4">← Start Over</button>
+              <button class="btn-secondary" id="btn-back-4">← Recalibrate Analysis</button>
             </div>
           </div>
         </div>
@@ -2641,13 +2648,13 @@ class CardSuggestApp {
       <footer class="footer">
         <div class="container">
           <div class="footer-content">
-            <p class="footer-brand">CardSuggest.in — India's Smartest Credit Card Advisor</p>
+            <p class="footer-brand">CARDO — The Master Advisor for Indian credit card strategy</p>
             <p class="footer-disclaimer">
               Disclaimer: Card features, fees, and reward rates are indicative and subject to change by the issuing bank.
-              Please verify current terms on the official bank website before applying.
-              CardSuggest earns affiliate commissions from partner banks at no additional cost to you.
+              Verify current terms on the official bank website before applying.
+              CARDO may earn affiliate commissions from partner banks at no additional cost to you.
             </p>
-            <p class="footer-copy">© 2026 CardSuggest. All rights reserved.</p>
+            <p class="footer-copy">© 2026 CARDO. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -2843,9 +2850,10 @@ class CardSuggestApp {
     const gridHtml = this.recommendations
       .map(
         (rec, index) => `
-      <div class="result-card ${index === 0 ? "top-pick" : ""}" data-card-id="${rec.card.id}">
+      <div class="result-card ${index === 0 ? "top-pick" : ""} ${rec.card.tier === "super-premium" ? "high-value" : ""}" data-card-id="${rec.card.id}">
         ${index === 0 ? '<div class="top-pick-badge">🏆 Top Pick</div>' : ""}
         ${index === 1 ? '<div class="top-pick-badge runner-up">⭐ Runner Up</div>' : ""}
+        ${rec.card.tier === "super-premium" ? '<div class="high-value-badge">High Value</div>' : ""}
         <div class="card-visual" style="background: ${rec.card.cardColor}; color: ${rec.card.textColor};">
           <div class="card-bank">${rec.card.bank}</div>
           <div class="card-name">${rec.card.name}</div>
@@ -2982,8 +2990,8 @@ class CardSuggestApp {
         </div>
 
         <div class="detail-section">
-          <h3>📊 Your Estimated Rewards Breakdown</h3>
-          <p class="rate-legend">Value blends portal-routed spend (boosted rate) and direct spend (base rate), using a realistic utilization estimate per category.</p>
+          <h3>📊 The CARDO Analysis · Optimized Yield</h3>
+          <p class="rate-legend">Yield blends portal-routed spend (boosted rate) and direct spend (base rate), modelled against realistic utilization per category.</p>
           <table class="detail-table breakdown-table">
             <thead>
               <tr>
@@ -3054,7 +3062,7 @@ class CardSuggestApp {
               </td>
             </tr>
             <tr class="net-row">
-              <td><strong>Net Annual Value</strong></td>
+              <td><strong>Optimized Yield · Net Annual Value</strong></td>
               <td></td>
               <td class="value-cell ${rec.netRewardValue > 0 ? "positive" : "negative"}">
                 <strong>₹${rec.netRewardValue.toLocaleString("en-IN")}</strong>
@@ -3067,7 +3075,7 @@ class CardSuggestApp {
           card.transferPartners.length > 0
             ? `
           <div class="detail-section">
-            <h3>🔄 Transfer Partners</h3>
+            <h3>🌐 Ecosystem Mapping · Transfer Partners</h3>
             <div class="partner-grid">
               ${card.transferPartners
                 .map(
@@ -3189,7 +3197,7 @@ class CardSuggestApp {
 
   trackAndRedirect(url) {
     // Analytics tracking placeholder
-    console.log(`[CardSuggest Analytics] Affiliate click: ${url}`, {
+    console.log(`[CARDO Analytics] Affiliate click: ${url}`, {
       userIncome: this.userProfile.income,
       userGoals: this.userProfile.goals,
       timestamp: new Date().toISOString(),
@@ -3247,5 +3255,5 @@ class CardSuggestApp {
 // ============================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-  new CardSuggestApp();
+  new CardoApp();
 });
