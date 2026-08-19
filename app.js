@@ -18,15 +18,42 @@
 // blocker, etc.), then poll briefly for the real SDK and swap in real values
 // once available.
 // ============================================================
-let var1 = { value: "CARDO" };  // fallback brand word for hero sub
-let var2 = { value: true };     // fallback hero CTA visibility
+const VAR_DEFAULTS = { language: "CARDO", visibility: true };
+
+let var1 = null;  // clevertap variable object for var_language
+let var2 = null;  // clevertap variable object for var_visibility
+
+// Per CleverTap docs, a variable object exposes getValue() / getdefaultValue().
+// Older/newer builds have also exposed a plain `.value` property, so read
+// defensively and fall back to our own default if neither is populated yet.
+function readVar(v, fallback) {
+  if (!v) return fallback;
+  if (typeof v.getValue === "function") {
+    const val = v.getValue();
+    if (val !== undefined && val !== null) return val;
+  }
+  if (v.value !== undefined && v.value !== null) return v.value;
+  if (typeof v.getdefaultValue === "function") {
+    const d = v.getdefaultValue();
+    if (d !== undefined && d !== null) return d;
+  }
+  return fallback;
+}
 
 function tryInitClevertapVariables(onReady) {
   if (typeof clevertap === "undefined" || typeof clevertap.defineVariable !== "function") {
     return false; // SDK not ready yet
   }
-  var1 = clevertap.defineVariable("var_language", "CARDO");
-  var2 = clevertap.defineVariable("var_visibility", true);
+
+  // Debug logging is required before syncVariables() will register these in
+  // the dashboard. Guarded because the method name isn't in the public docs.
+  if (typeof clevertap.setLogLevel === "function") {
+    clevertap.setLogLevel(4);
+  }
+
+  var1 = clevertap.defineVariable("var_language", VAR_DEFAULTS.language);
+  var2 = clevertap.defineVariable("var_visibility", VAR_DEFAULTS.visibility);
+
   if (typeof clevertap.fetchVariables === "function") {
     clevertap.fetchVariables(() => onReady && onReady());
   } else if (onReady) {
@@ -34,6 +61,32 @@ function tryInitClevertapVariables(onReady) {
   }
   return true;
 }
+
+// ---------------------------------------------------------------
+// DEV ONLY — registers the variables above in the CleverTap dashboard.
+//
+// Defining a variable client-side does NOT create it in the dashboard.
+// You must sync it once, and CleverTap requires ALL of the following:
+//   1. Log level 4 (set automatically above)
+//   2. The current user profile marked as a TEST PROFILE in the dashboard
+//      (Settings -> Test Users / mark the profile from a Live event)
+//   3. No conflicting variable draft created by another profile — an
+//      existing draft makes the sync fail by design, so publish or
+//      dismiss it first.
+//
+// Run in the browser console:  cardoSyncVariables()
+// Then check: Dashboard -> Product Experiences -> Variables
+// ---------------------------------------------------------------
+window.cardoSyncVariables = function () {
+  if (typeof clevertap === "undefined" || typeof clevertap.syncVariables !== "function") {
+    console.error("[CARDO] clevertap.syncVariables unavailable — SDK not loaded, or below v1.11.10.");
+    return;
+  }
+  clevertap.syncVariables(
+    function () { console.log("[CARDO] ✅ Variables synced — check Product Experiences -> Variables."); },
+    function (err) { console.error("[CARDO] ❌ Variable sync failed. Confirm this is a test profile, the account token is set in index.html, and no other draft exists.", err); }
+  );
+};
 
 // Poll for ~10s (40 x 250ms) in case a.js is still loading. If it never
 // shows up (blocked, offline, etc.) we just keep the fallback values above
@@ -2501,14 +2554,16 @@ class CardoApp {
   applyClevertapVariables() {
     // var1 → replaces "CARDO" inside the hero sub-headline
     const brandEl = document.getElementById("brand-name");
-    if (brandEl && var1 && var1.value) {
-      brandEl.textContent = var1.value;
+    const brandWord = readVar(var1, VAR_DEFAULTS.language);
+    if (brandEl && brandWord) {
+      brandEl.textContent = brandWord;
     }
 
     // var2 → controls visibility of the hero CTA (.btn-primary.btn-large)
     const ctaEl = document.getElementById("btn-start");
-    if (ctaEl && var2) {
-      const show = var2.value === true || var2.value === "true";
+    if (ctaEl) {
+      const raw = readVar(var2, VAR_DEFAULTS.visibility);
+      const show = raw === true || raw === "true";
       ctaEl.style.display = show ? "" : "none";
       ctaEl.setAttribute("aria-hidden", String(!show));
     }
