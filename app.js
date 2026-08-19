@@ -5,11 +5,47 @@
 
 // ============================================================
 // SECTION 0: CLEVERTAP WEB PERSONALIZATION VARIABLES
-// Must be defined before clevertap.init() so they register
-// with the dashboard as targetable variables.
+// The CleverTap SDK (a.js, injected by the snippet in index.html) loads
+// ASYNCHRONOUSLY. At the moment this script first runs, clevertap.defineVariable
+// and clevertap.fetchVariables may not exist yet (the boilerplate stub in
+// index.html only pre-declares event/profile/account/onUserLogin/notifications/
+// privacy as queueable arrays — NOT defineVariable). Calling a missing method
+// throws immediately and — since this used to happen at the top of the file —
+// halted the ENTIRE script, which is why the site failed to render at all.
+//
+// Fix: never call these methods unguarded. Start with safe fallback values so
+// the rest of the app works even if CleverTap never loads (slow network, ad
+// blocker, etc.), then poll briefly for the real SDK and swap in real values
+// once available.
 // ============================================================
-const var1 = clevertap.defineVariable("var_language", "CARDO");   // brand word in hero sub
-const var2 = clevertap.defineVariable("var_visibility", true);    // hero CTA visibility
+let var1 = { value: "CARDO" };  // fallback brand word for hero sub
+let var2 = { value: true };     // fallback hero CTA visibility
+
+function tryInitClevertapVariables(onReady) {
+  if (typeof clevertap === "undefined" || typeof clevertap.defineVariable !== "function") {
+    return false; // SDK not ready yet
+  }
+  var1 = clevertap.defineVariable("var_language", "CARDO");
+  var2 = clevertap.defineVariable("var_visibility", true);
+  if (typeof clevertap.fetchVariables === "function") {
+    clevertap.fetchVariables(() => onReady && onReady());
+  } else if (onReady) {
+    onReady();
+  }
+  return true;
+}
+
+// Poll for ~10s (40 x 250ms) in case a.js is still loading. If it never
+// shows up (blocked, offline, etc.) we just keep the fallback values above
+// and the site keeps working normally.
+(function pollForClevertap(attemptsLeft) {
+  const ready = tryInitClevertapVariables(() => {
+    if (typeof window.__cardoApplyCTVars === "function") window.__cardoApplyCTVars();
+  });
+  if (!ready && attemptsLeft > 0) {
+    setTimeout(() => pollForClevertap(attemptsLeft - 1), 250);
+  }
+})(40);
 
 // ============================================================
 // SECTION 1: CREDIT CARD DATABASE
@@ -2453,26 +2489,25 @@ class CardoApp {
     this.attachEventListeners();
     this.showStep(1);
 
-    // CleverTap variables aren't populated until the SDK fetches them from
-    // the server, so apply once immediately (in case of cached/default
-    // values) and again inside the fetch callback once real values land.
+    // Apply whatever CleverTap values are available right now (fallback
+    // defaults if the SDK hasn't loaded yet), then expose a hook so the
+    // async poller in Section 0 can re-apply once real values arrive —
+    // possibly seconds later, well after this render already happened.
     this.applyClevertapVariables();
-    if (typeof clevertap !== "undefined" && clevertap.fetchVariables) {
-      clevertap.fetchVariables(() => this.applyClevertapVariables());
-    }
+    window.__cardoApplyCTVars = () => this.applyClevertapVariables();
   }
 
   // Applies var1 (hero-sub brand word) and var2 (hero CTA visibility).
   applyClevertapVariables() {
     // var1 → replaces "CARDO" inside the hero sub-headline
     const brandEl = document.getElementById("brand-name");
-    if (brandEl && typeof var1 !== "undefined" && var1.value) {
+    if (brandEl && var1 && var1.value) {
       brandEl.textContent = var1.value;
     }
 
     // var2 → controls visibility of the hero CTA (.btn-primary.btn-large)
     const ctaEl = document.getElementById("btn-start");
-    if (ctaEl && typeof var2 !== "undefined") {
+    if (ctaEl && var2) {
       const show = var2.value === true || var2.value === "true";
       ctaEl.style.display = show ? "" : "none";
       ctaEl.setAttribute("aria-hidden", String(!show));
