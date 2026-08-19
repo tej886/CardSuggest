@@ -4,9 +4,16 @@
 // ============================================================
 
 // ============================================================
+// SECTION 0: CLEVERTAP WEB PERSONALIZATION VARIABLES
+// Must be defined before clevertap.init() so they register
+// with the dashboard as targetable variables.
+// ============================================================
+const var1 = clevertap.defineVariable("var_language", "CARDO");   // brand word in hero sub
+const var2 = clevertap.defineVariable("var_visibility", true);    // hero CTA visibility
+
+// ============================================================
 // SECTION 1: CREDIT CARD DATABASE
 // ============================================================
-
 const CARDS_DATABASE = [
   // ──────────────────────────────────────────────────────────
   // HDFC BANK CARDS
@@ -464,7 +471,6 @@ const CARDS_DATABASE = [
     cardColor: "linear-gradient(135deg, #5f259f 0%, #7b2cbf 100%)",
     textColor: "#ffffff",
   },
-
   // ──────────────────────────────────────────────────────────
   // ICICI BANK CARDS
   // ──────────────────────────────────────────────────────────
@@ -784,7 +790,6 @@ const CARDS_DATABASE = [
     cardColor: "linear-gradient(135deg, #004d40 0%, #00695c 50%, #009688 100%)",
     textColor: "#ffffff",
   },
-
   // ──────────────────────────────────────────────────────────
   // AXIS BANK CARDS
   // ──────────────────────────────────────────────────────────
@@ -1161,7 +1166,6 @@ const CARDS_DATABASE = [
     cardColor: "linear-gradient(135deg, #4a0e0e 0%, #6d1b1b 50%, #8b0000 100%)",
     textColor: "#d4af37",
   },
-
   // ──────────────────────────────────────────────────────────
   // HSBC CARDS
   // ──────────────────────────────────────────────────────────
@@ -1344,7 +1348,6 @@ const CARDS_DATABASE = [
     cardColor: "linear-gradient(135deg, #c41e3a 0%, #6a1b9a 50%, #1a1a2e 100%)",
     textColor: "#ffffff",
   },
-
   // ──────────────────────────────────────────────────────────
   // BANK OF BARODA (BOB) CARDS
   // ──────────────────────────────────────────────────────────
@@ -1475,7 +1478,6 @@ const CARDS_DATABASE = [
     cardColor: "linear-gradient(135deg, #ff6f00 0%, #ffa000 100%)",
     textColor: "#ffffff",
   },
-
   // ──────────────────────────────────────────────────────────
   // SBI CARDS
   // ──────────────────────────────────────────────────────────
@@ -1880,7 +1882,6 @@ const CARDS_DATABASE = [
 // ============================================================
 // SECTION 2: SPENDING CATEGORIES DEFINITION
 // ============================================================
-
 // defaultFraction = typical monthly spend as share of monthly gross income
 // maxFraction     = upper bound of slider as share of monthly gross income
 const SPENDING_CATEGORIES = [
@@ -1934,7 +1935,6 @@ const INCOME_RANGES = [
 // earn accelerated/bonus points vs the base card reward rate.
 // Rendered inside the card detail modal.
 // ============================================================
-
 const REWARD_PORTALS_BY_BANK = {
   "HDFC Bank": {
     loyaltyProgram: "HDFC Reward Points (1 RP ≈ ₹0.30 standard; ₹1 via SmartBuy)",
@@ -2250,7 +2250,6 @@ function getCategoryAccelerators(card, categoryId) {
 // ============================================================
 // SECTION 3: RECOMMENDATION ENGINE
 // ============================================================
-
 class RecommendationEngine {
   constructor(userProfile) {
     this.profile = userProfile;
@@ -2291,6 +2290,7 @@ class RecommendationEngine {
       const categoryRewardValue = routedValue + directValue;
 
       annualRewardValue += categoryRewardValue;
+
       breakdown[cat.id] = {
         spend: annualCategorySpend,
         rate: eff.effectiveRate,       // blended effective % used in calc
@@ -2311,6 +2311,7 @@ class RecommendationEngine {
     const feeWaived = card.feeWaiverSpend && this.annualSpend >= card.feeWaiverSpend;
     const effectiveFee = feeWaived ? 0 : card.annualFee;
     const netRewardValue = annualRewardValue - effectiveFee;
+
     score += (netRewardValue / Math.max(this.annualSpend, 1)) * 4000; // normalize
 
     // 2. Goal alignment (35% weight)
@@ -2433,7 +2434,6 @@ class RecommendationEngine {
 // ============================================================
 // SECTION 4: UI APPLICATION CONTROLLER
 // ============================================================
-
 class CardoApp {
   constructor() {
     this.currentStep = 1;
@@ -2452,6 +2452,31 @@ class CardoApp {
     this.renderApp();
     this.attachEventListeners();
     this.showStep(1);
+
+    // CleverTap variables aren't populated until the SDK fetches them from
+    // the server, so apply once immediately (in case of cached/default
+    // values) and again inside the fetch callback once real values land.
+    this.applyClevertapVariables();
+    if (typeof clevertap !== "undefined" && clevertap.fetchVariables) {
+      clevertap.fetchVariables(() => this.applyClevertapVariables());
+    }
+  }
+
+  // Applies var1 (hero-sub brand word) and var2 (hero CTA visibility).
+  applyClevertapVariables() {
+    // var1 → replaces "CARDO" inside the hero sub-headline
+    const brandEl = document.getElementById("brand-name");
+    if (brandEl && typeof var1 !== "undefined" && var1.value) {
+      brandEl.textContent = var1.value;
+    }
+
+    // var2 → controls visibility of the hero CTA (.btn-primary.btn-large)
+    const ctaEl = document.getElementById("btn-start");
+    if (ctaEl && typeof var2 !== "undefined") {
+      const show = var2.value === true || var2.value === "true";
+      ctaEl.style.display = show ? "" : "none";
+      ctaEl.setAttribute("aria-hidden", String(!show));
+    }
   }
 
   renderApp() {
@@ -2477,7 +2502,7 @@ class CardoApp {
         <div class="container">
           <span class="hero-eyebrow">The Master Advisor</span>
           <h1>A <span class="gold">bespoke</span> credit card strategy,<br>engineered for your spend.</h1>
-          <p class="hero-sub">CARDO reads your profile, maps your spending, and audits every card across HDFC, ICICI, Axis, HSBC, Bank of Baroda &amp; SBI — returning a single precise verdict: the card that maximizes your <em>Optimized Yield</em>.</p>
+          <p class="hero-sub"><span id="brand-name">CARDO</span> reads your profile, maps your spending, and audits every card across HDFC, ICICI, Axis, HSBC, Bank of Baroda &amp; SBI — returning a single precise verdict: the card that maximizes your <em>Optimized Yield</em>.</p>
           <button class="btn-primary btn-large" id="btn-start">
             Begin the CARDO Analysis
             <span class="btn-arrow">→</span>
@@ -2781,12 +2806,14 @@ class CardoApp {
   scaleSpendingSliders() {
     const annualIncome = this.userProfile.income;
     if (!annualIncome) return;
+
     const monthlyIncome = annualIncome / 12;
     const step = getSliderStep(monthlyIncome);
 
     SPENDING_CATEGORIES.forEach((cat) => {
       const slider = document.getElementById(`spend-${cat.id}`);
       if (!slider) return;
+
       const defaultVal = roundToStep(monthlyIncome * cat.defaultFraction, step);
       const maxVal = Math.max(step * 4, roundToStep(monthlyIncome * cat.maxFraction, step));
 
@@ -2933,8 +2960,8 @@ class CardoApp {
   showCardDetail(cardId) {
     const rec = this.recommendations.find((r) => r.card.id === cardId);
     if (!rec) return;
-    const card = rec.card;
 
+    const card = rec.card;
     const modalHtml = `
       <div class="detail-header" style="background: ${card.cardColor}; color: ${card.textColor};">
         <div class="detail-bank">${card.bank}</div>
@@ -3225,6 +3252,7 @@ class CardoApp {
       b.classList.remove("active");
       if (b.dataset.value === "salaried") b.classList.add("active");
     });
+
     // Reset sliders to 0 and clear their displayed values
     document.querySelectorAll(".spending-input").forEach((i) => {
       i.min = 0;
@@ -3239,7 +3267,9 @@ class CardoApp {
       const m = document.getElementById(`spend-max-${cat.id}`);
       if (m) m.textContent = "₹1L";
     });
+
     document.querySelectorAll(".goal-card").forEach((c) => c.classList.remove("selected"));
+
     document.getElementById("total-spend").textContent = "₹0";
     document.getElementById("goals-count").textContent = "0";
     document.getElementById("btn-next-1").disabled = true;
@@ -3253,7 +3283,6 @@ class CardoApp {
 // ============================================================
 // SECTION 5: INITIALIZE APP
 // ============================================================
-
 document.addEventListener("DOMContentLoaded", () => {
   new CardoApp();
 });
