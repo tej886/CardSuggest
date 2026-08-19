@@ -2,20 +2,49 @@
 <html lang="en">
 <head>
   <script type="text/javascript">
-     var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
- // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
-clevertap.account.push({ "id": "R5K-486-ZW7Z" }, "eu1");
-clevertap.privacy.push({optOut: false}); //set the flag to true, if the user of the device opts out of sharing their data
-clevertap.privacy.push({useIP: true}); //set the flag to true, if the user agrees to share their IP data
- (function () {
-         var wzrk = document.createElement('script');
-         wzrk.type = 'text/javascript';
-         wzrk.async = true;
-         wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
-        var s = document.getElementsByTagName('script')[0];
-         s.parentNode.insertBefore(wzrk, s);
-  })();
-</script>
+    // ----------------------------------------------------------------
+    // CleverTap Web SDK bootstrap
+    //
+    // IMPORTANT for Product Experiences / Remote Config variables:
+    //   * `region` and `token` MUST be present on this stub object.
+    //     Variables (defineVariable / fetchVariables / syncVariables) will
+    //     NOT work without the account token — it authenticates the
+    //     variable sync + fetch calls against your project.
+    //   * Region is a PROPERTY of this object. Do NOT pass it as a second
+    //     argument to account.push() — push(a, b) just appends two separate
+    //     elements to the array, so the region is silently ignored.
+    //   * Requires Web SDK v1.11.10 or higher (a.js below is auto-updated).
+    //
+    // Get the token from: CleverTap Dashboard -> Settings -> Project
+    // (shown as the account "passcode" / token, next to the Account ID).
+    // ----------------------------------------------------------------
+    var clevertap = {
+      event: [],
+      profile: [],
+      account: [],
+      onUserLogin: [],
+      notifications: [],
+      privacy: [],
+      region: 'eu1',
+      token: 'PASTE_YOUR_ACCOUNT_TOKEN_HERE'
+    };
+
+    clevertap.account.push({ "id": "R5K-486-ZW7Z" });
+
+    clevertap.privacy.push({ optOut: false }); // true if the user opts out of sharing their data
+    clevertap.privacy.push({ useIP: true });   // true if the user agrees to share their IP
+
+    (function () {
+      var wzrk = document.createElement('script');
+      wzrk.type = 'text/javascript';
+      wzrk.async = true;
+      wzrk.src = ('https:' == document.location.protocol
+        ? 'https://d2r1yp2w7bby2u.cloudfront.net'
+        : 'http://static.clevertap.com') + '/js/a.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wzrk, s);
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CARDO — The Master Advisor for Indian credit card strategy</title>

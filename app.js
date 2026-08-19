@@ -88,6 +88,94 @@ window.cardoSyncVariables = function () {
   );
 };
 
+// ---------------------------------------------------------------
+// SECTION 0B: SDK REACHABILITY DIAGNOSTICS
+//
+// Why an event push is a good test — and what it does NOT prove:
+// The stub in index.html declares `event: []`, a real Array. So
+// clevertap.event.push(...) ALWAYS succeeds, even before a.js loads — it
+// just queues into that array, and the SDK drains the queue on load. This
+// is by design and is why events are never lost to load-order races.
+//
+// Consequence: "the push didn't throw" tells you nothing about whether the
+// SDK loaded. The two real signals are:
+//   1. isClevertapSdkReady() below — the real SDK replaces the stub and adds
+//      methods like defineVariable, which the plain-array stub never has.
+//   2. The event actually appearing in Dashboard -> Events (Live view).
+//      That is the only thing that confirms account ID, region, token and
+//      network path are all correct end to end.
+// ---------------------------------------------------------------
+
+// True only once the real SDK (a.js) has replaced the bootstrap stub.
+function isClevertapSdkReady() {
+  return typeof clevertap !== "undefined" && typeof clevertap.defineVariable === "function";
+}
+
+// Safely raise a CleverTap event. Queues if the SDK is still loading.
+function pushEvent(name, props) {
+  if (typeof clevertap === "undefined" || !clevertap.event || typeof clevertap.event.push !== "function") {
+    console.warn(`[CARDO] Cannot push "${name}" — clevertap.event is unavailable. Is the snippet in index.html above this script?`);
+    return false;
+  }
+
+  if (props && Object.keys(props).length > 0) {
+    clevertap.event.push(name, props);
+  } else {
+    clevertap.event.push(name);
+  }
+
+  const state = isClevertapSdkReady() ? "sent (SDK live)" : "QUEUED (SDK still loading — will flush on load)";
+  console.log(`[CARDO] Event "${name}" → ${state}`, props || "");
+  return true;
+}
+
+// Console helper: prints the full SDK state. Run: cardoDiagnostics()
+window.cardoDiagnostics = function () {
+  const ready = isClevertapSdkReady();
+  const info = {
+    "clevertap global exists": typeof clevertap !== "undefined",
+    "real SDK loaded (a.js)": ready,
+    "account id configured": typeof clevertap !== "undefined" && clevertap.account ? JSON.stringify(clevertap.account) : "n/a",
+    "region": typeof clevertap !== "undefined" ? (clevertap.region || "❌ NOT SET") : "n/a",
+    "token set": typeof clevertap !== "undefined"
+      ? (clevertap.token && clevertap.token !== "PASTE_YOUR_ACCOUNT_TOKEN_HERE" ? "✅ yes" : "❌ missing/placeholder — variables will not work")
+      : "n/a",
+    "defineVariable available": typeof clevertap !== "undefined" && typeof clevertap.defineVariable === "function",
+    "fetchVariables available": typeof clevertap !== "undefined" && typeof clevertap.fetchVariables === "function",
+    "syncVariables available": typeof clevertap !== "undefined" && typeof clevertap.syncVariables === "function",
+    "var_language current value": readVar(var1, "(unresolved → falling back to default)"),
+    "var_visibility current value": readVar(var2, "(unresolved → falling back to default)"),
+  };
+  console.table ? console.table(info) : console.log(info);
+  if (!ready) {
+    console.warn("[CARDO] Real SDK not detected yet. If this persists past a few seconds: check for an ad/tracker blocker, and confirm a.js loads in the Network tab.");
+  }
+  return info;
+};
+
+// Console helper: identify this browser as a known profile. Useful because
+// marking yourself as a TEST PROFILE (a prerequisite for syncVariables) is
+// far easier when the profile is findable by identity instead of hunting
+// for an anonymous one. Run: cardoIdentify("you@example.com")
+window.cardoIdentify = function (email, name) {
+  if (typeof clevertap === "undefined" || !clevertap.onUserLogin || typeof clevertap.onUserLogin.push !== "function") {
+    console.error("[CARDO] clevertap.onUserLogin unavailable.");
+    return;
+  }
+  if (!email) {
+    console.error('[CARDO] Pass an email, e.g. cardoIdentify("you@example.com")');
+    return;
+  }
+  clevertap.onUserLogin.push({
+    Site: {
+      Identity: email,
+      Email: email,
+      Name: name || email.split("@")[0],
+    },
+  });
+  console.log(`[CARDO] Identified as ${email}. Find this profile in the dashboard and mark it as a test profile, then run cardoSyncVariables().`);
+};
+
 // Poll for ~10s (40 x 250ms) in case a.js is still loading. If it never
 // shows up (blocked, offline, etc.) we just keep the fallback values above
 // and the site keeps working normally.
@@ -2548,6 +2636,18 @@ class CardoApp {
     // possibly seconds later, well after this render already happened.
     this.applyClevertapVariables();
     window.__cardoApplyCTVars = () => this.applyClevertapVariables();
+
+    // Reachability test event. Safe to fire immediately — if a.js is still
+    // loading this queues into the stub array and flushes automatically.
+    // Confirm arrival in Dashboard -> Events -> "Home Page Loaded" (Live view).
+    pushEvent("Home Page Loaded", {
+      Page: "CARDO Home",
+      "Cards In Database": CARDS_DATABASE.length,
+      "SDK Ready At Push": isClevertapSdkReady(),
+    });
+
+    // One-shot console summary so the SDK state is visible without being asked.
+    console.log("[CARDO] Run cardoDiagnostics() for full CleverTap SDK state.");
   }
 
   // Applies var1 (hero-sub brand word) and var2 (hero CTA visibility).
