@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CleverTap Variables — Isolation Test Harness</title>
+<script type="text/javascript">
+  // ===== FILL THESE IN =====
+  var CT_ACCOUNT_ID = 'R5K-486-ZW7Z';
+  var CT_REGION     = 'eu1';
+  var CT_TOKEN      = 'PASTE_YOUR_ACCOUNT_TOKEN_HERE';
+  // =========================
+
+  // Verbose SDK logging (documented in the official web SDK README).
+  try { sessionStorage['WZRK_D'] = ''; } catch (e) {}
+
+  var clevertap = {
+    event: [], profile: [], account: [], onUserLogin: [], notifications: [], privacy: [],
+    region: CT_REGION,
+    token: CT_TOKEN
+  };
+  clevertap.account.push({ "id": CT_ACCOUNT_ID });
+  clevertap.privacy.push({ optOut: false });
+  clevertap.privacy.push({ useIP: true });
+
+  (function () {
+    var wzrk = document.createElement('script');
+    wzrk.type = 'text/javascript';
+    wzrk.async = true;
+    wzrk.src = ('https:' == document.location.protocol
+      ? 'https://d2r1yp2w7bby2u.cloudfront.net'
+      : 'http://static.clevertap.com') + '/js/a.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wzrk, s);
+  })();
+</script>
+<style>
+  :root { --bg:#0f1116; --panel:#171a21; --line:#272b35; --ink:#e6e8ee; --dim:#8b90a0;
+          --ok:#3fb950; --bad:#f85149; --warn:#d29922; --accent:#58a6ff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; padding:24px; }
+  h1 { font-size:17px; margin:0 0 4px; }
+  .sub { color:var(--dim); font-size:12.5px; margin-bottom:20px; }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px;
+           padding:16px; margin-bottom:16px; }
+  .panel h2 { font-size:12px; text-transform:uppercase; letter-spacing:.09em;
+              color:var(--dim); margin:0 0 12px; font-weight:600; }
+  table { width:100%; border-collapse:collapse; }
+  td { padding:5px 0; border-bottom:1px solid var(--line); vertical-align:top; }
+  td:first-child { color:var(--dim); width:46%; padding-right:12px; }
+  tr:last-child td { border-bottom:none; }
+  .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+  button { background:#21262d; color:var(--ink); border:1px solid #363b45;
+           border-radius:6px; padding:9px 14px; font:inherit; font-size:13px;
+           cursor:pointer; margin:0 8px 8px 0; }
+  button:hover { background:#2b313a; border-color:var(--accent); }
+  button:disabled { opacity:.4; cursor:not-allowed; }
+  #log { background:#0b0d11; border:1px solid var(--line); border-radius:6px;
+         padding:12px; height:280px; overflow-y:auto; white-space:pre-wrap;
+         font-size:12.5px; line-height:1.6; }
+  .banner { padding:11px 13px; border-radius:6px; margin-bottom:16px; font-size:13px; }
+  .banner.bad { background:rgba(248,81,73,.12); border:1px solid rgba(248,81,73,.4); }
+  .banner.ok  { background:rgba(63,185,80,.12); border:1px solid rgba(63,185,80,.4); }
+  code { background:#21262d; padding:1px 5px; border-radius:3px; font-size:12.5px; }
+</style>
+</head>
+<body>
+  <h1>CleverTap Variables — Isolation Test Harness</h1>
+  <div class="sub">Minimal reproduction, independent of the CARDO app. Run the buttons top to bottom.</div>
+
+  <div id="banner"></div>
+
+  <div class="panel">
+    <h2>SDK State</h2>
+    <table id="state"></table>
+  </div>
+
+  <div class="panel">
+    <h2>Run in order</h2>
+    <button onclick="reprobe()">1 · Re-probe SDK</button>
+    <button onclick="doIdentify()">2 · Identify profile</button>
+    <button onclick="doEvent()">3 · Push test event</button>
+    <button onclick="doDefine()">4 · Define variables</button>
+    <button onclick="doFetch()">5 · Fetch variables</button>
+    <button onclick="doSync()">6 · Sync to dashboard</button>
+  </div>
+
+  <div class="panel">
+    <h2>Output</h2>
+    <div id="log"></div>
+  </div>
+
+<script>
+  var v1 = null, v2 = null;
+  var logEl = document.getElementById('log');
+
+  function log(msg, cls) {
+    var t = new Date().toTimeString().slice(0, 8);
+    var line = document.createElement('div');
+    if (cls) line.className = cls;
+    line.textContent = '[' + t + '] ' + msg;
+    logEl.appendChild(line);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  function sdkReady() {
+    return typeof clevertap !== 'undefined' && typeof clevertap.defineVariable === 'function';
+  }
+
+  // The SDK doesn't expose a documented version getter, so probe likely spots.
+  function probeVersion() {
+    var cands = ['getSDKVersion', 'version', '_version', 'sdkVersion', 'VERSION'];
+    for (var i = 0; i < cands.length; i++) {
+      var k = cands[i];
+      if (typeof clevertap === 'undefined') break;
+      if (typeof clevertap[k] === 'function') { try { return String(clevertap[k]()); } catch (e) {} }
+      else if (clevertap[k]) return String(clevertap[k]);
+    }
+    return 'not exposed';
+  }
+
+  function row(label, value, cls) {
+    return '<tr><td>' + label + '</td><td class="' + (cls || '') + '">' + value + '</td></tr>';
+  }
+
+  function yn(b) { return b ? ['yes', 'ok'] : ['NO', 'bad']; }
+
+  function reprobe() {
+    var tokenOk = typeof clevertap !== 'undefined' && clevertap.token &&
+                  clevertap.token !== 'PASTE_YOUR_ACCOUNT_TOKEN_HERE';
+    var hasDefine = typeof clevertap !== 'undefined' && typeof clevertap.defineVariable === 'function';
+    var hasFetch  = typeof clevertap !== 'undefined' && typeof clevertap.fetchVariables === 'function';
+    var hasSync   = typeof clevertap !== 'undefined' && typeof clevertap.syncVariables === 'function';
+    var hasLog    = typeof clevertap !== 'undefined' && typeof clevertap.setLogLevel === 'function';
+
+    var h = '';
+    h += row('Account ID', CT_ACCOUNT_ID);
+    h += row('Region', CT_REGION + (CT_REGION === 'eu1'
+          ? ' <span class="warn">(not in README\'s in1/us1/sg1/aps3/mec1 list — verify)</span>' : ''));
+    h += row('Token set', tokenOk ? 'yes' : 'NO — placeholder', tokenOk ? 'ok' : 'bad');
+    h += row('SDK script loaded', yn(sdkReady())[0], yn(sdkReady())[1]);
+    h += row('SDK version', probeVersion());
+    h += row('defineVariable()', yn(hasDefine)[0], yn(hasDefine)[1]);
+    h += row('fetchVariables()', yn(hasFetch)[0], yn(hasFetch)[1]);
+    h += row('syncVariables()', yn(hasSync)[0], yn(hasSync)[1]);
+    h += row('setLogLevel()', yn(hasLog)[0], yn(hasLog)[1]);
+    document.getElementById('state').innerHTML = h;
+
+    var b = document.getElementById('banner');
+    if (!sdkReady()) {
+      b.className = 'banner bad';
+      b.innerHTML = '<strong>SDK not loaded.</strong> Check the Network tab for <code>a.js</code>. ' +
+        'If it 404s or is blocked, an ad/tracker blocker or CSP is the cause.';
+    } else if (!hasDefine || !hasSync) {
+      b.className = 'banner bad';
+      b.innerHTML = '<strong>This SDK build has no variables support.</strong> ' +
+        '<code>defineVariable</code>/<code>syncVariables</code> are missing, so variables can never reach the dashboard. ' +
+        'Requires v1.11.10+ — switch to the npm package pinned to a known-good version.';
+    } else if (!tokenOk) {
+      b.className = 'banner bad';
+      b.innerHTML = '<strong>Token missing.</strong> Variables cannot sync without it.';
+    } else {
+      b.className = 'banner ok';
+      b.innerHTML = '<strong>Client-side prerequisites met.</strong> Run steps 2 → 6.';
+    }
+
+    log('Probe: SDK=' + sdkReady() + ' define=' + hasDefine + ' sync=' + hasSync +
+        ' setLogLevel=' + hasLog + ' version=' + probeVersion(),
+        sdkReady() ? 'ok' : 'bad');
+
+    if (hasLog) {
+      try { clevertap.setLogLevel(4); log('setLogLevel(4) called (level 4 is required for sync).', 'ok'); }
+      catch (e) { log('setLogLevel(4) threw: ' + e.message, 'bad'); }
+    } else {
+      log('setLogLevel unavailable — cannot reach log level 4, which sync requires.', 'warn');
+    }
+  }
+
+  function doIdentify() {
+    var email = prompt('Email to identify this profile as:', 'tejas.narayanaswamy@clevertap.com');
+    if (!email) return;
+    clevertap.onUserLogin.push({ Site: { Identity: email, Email: email, Name: email.split('@')[0] } });
+    log('Identified as ' + email + '. Now mark this profile as a TEST PROFILE in the dashboard.', 'ok');
+  }
+
+  function doEvent() {
+    clevertap.event.push('Home Page Loaded', { Page: 'Harness', Source: 'isolation-test' });
+    log('Pushed "Home Page Loaded". ' + (sdkReady() ? 'SDK live — should appear in Events within ~30s.'
+        : 'QUEUED — SDK not loaded yet.'), sdkReady() ? 'ok' : 'warn');
+    log('→ If this event does NOT arrive in the dashboard, your ACCOUNT ID or REGION is wrong ' +
+        '(events need neither token nor variables support). That would explain everything.', 'warn');
+  }
+
+  function doDefine() {
+    if (typeof clevertap.defineVariable !== 'function') {
+      log('defineVariable unavailable — SDK too old or not loaded.', 'bad'); return;
+    }
+    try {
+      v1 = clevertap.defineVariable('var_language', 'CARDO');
+      v2 = clevertap.defineVariable('var_visibility', true);
+      log('Defined var_language (String) + var_visibility (Boolean). ' +
+          'NOTE: this is client-side only — nothing is in the dashboard yet.', 'ok');
+    } catch (e) { log('defineVariable threw: ' + e.message, 'bad'); }
+  }
+
+  function readVal(v) {
+    if (!v) return '(undefined)';
+    if (typeof v.getValue === 'function') { try { return JSON.stringify(v.getValue()); } catch (e) {} }
+    if (v.value !== undefined) return JSON.stringify(v.value);
+    return '(no getValue/.value)';
+  }
+
+  function doFetch() {
+    if (typeof clevertap.fetchVariables !== 'function') {
+      log('fetchVariables unavailable.', 'bad'); return;
+    }
+    log('Calling fetchVariables()…');
+    clevertap.fetchVariables(function () {
+      log('Fetch callback fired. var_language=' + readVal(v1) + ' var_visibility=' + readVal(v2), 'ok');
+    });
+  }
+
+  function doSync() {
+    if (typeof clevertap.syncVariables !== 'function') {
+      log('syncVariables unavailable — SDK below v1.11.10. This alone prevents dashboard registration.', 'bad');
+      return;
+    }
+    if (!v1 || !v2) { log('Run step 4 (Define variables) first.', 'warn'); return; }
+    log('Calling syncVariables()…');
+    clevertap.syncVariables(
+      function () {
+        log('✅ SYNC SUCCESS — check Dashboard → Product Experiences → Variables.', 'ok');
+      },
+      function (err) {
+        log('❌ SYNC FAILED: ' + (err ? JSON.stringify(err) : '(no error detail)'), 'bad');
+        log('Server-side causes, in likelihood order:', 'warn');
+        log('  1. This profile is not marked as a TEST PROFILE (do step 2, then mark it).', 'warn');
+        log('  2. Another profile has an unpublished variable DRAFT — publish/dismiss it.', 'warn');
+        log('  3. Log level never reached 4.', 'warn');
+        log('  4. Token invalid for this account/region.', 'warn');
+      }
+    );
+  }
+
+  // Probe on load, then again shortly after in case a.js is still in flight.
+  window.addEventListener('load', function () {
+    reprobe();
+    setTimeout(reprobe, 2500);
+    setTimeout(reprobe, 6000);
+  });
+</script>
+</body>
+</html>
