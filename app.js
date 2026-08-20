@@ -90,7 +90,7 @@ function preflightSync() {
     blockers.push("`clevertap` global missing — is the snippet in index.html above app.js?");
     return blockers;
   }
-  if (!clevertap.token || clevertap.token === "PASTE_YOUR_ACCOUNT_TOKEN_HERE") {
+  if (!clevertap.token || clevertap.token === "6b4-352") {
     blockers.push("Account TOKEN not set in index.html — variables cannot sync or fetch without it. (Dashboard -> Settings -> Project)");
   }
   if (!clevertap.region) {
