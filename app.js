@@ -77,14 +77,58 @@ function tryInitClevertapVariables(onReady) {
 // Run in the browser console:  cardoSyncVariables()
 // Then check: Dashboard -> Product Experiences -> Variables
 // ---------------------------------------------------------------
+// Checks every prerequisite the CleverTap docs list for syncVariables().
+// Returns an array of blocking problems — empty array means good to go.
+// Note: two prerequisites are SERVER-side and cannot be detected from JS:
+//   - the profile being marked as a test profile
+//   - an existing variable draft created by another profile
+// Those two can only surface as a sync failure callback.
+function preflightSync() {
+  const blockers = [];
+
+  if (typeof clevertap === "undefined") {
+    blockers.push("`clevertap` global missing — is the snippet in index.html above app.js?");
+    return blockers;
+  }
+  if (!clevertap.token || clevertap.token === "PASTE_YOUR_ACCOUNT_TOKEN_HERE") {
+    blockers.push("Account TOKEN not set in index.html — variables cannot sync or fetch without it. (Dashboard -> Settings -> Project)");
+  }
+  if (!clevertap.region) {
+    blockers.push("`region` not set on the clevertap object in index.html (should be 'eu1' for your account).");
+  }
+  if (typeof clevertap.defineVariable !== "function") {
+    blockers.push("Real SDK not loaded yet, or below v1.11.10 — defineVariable is unavailable.");
+  }
+  if (typeof clevertap.syncVariables !== "function") {
+    blockers.push("clevertap.syncVariables unavailable — requires Web SDK v1.11.10 or higher.");
+  }
+  if (!var1 || !var2) {
+    blockers.push("Variables were never defined client-side (defineVariable did not run — likely blocked by one of the above).");
+  }
+  return blockers;
+}
+
 window.cardoSyncVariables = function () {
-  if (typeof clevertap === "undefined" || typeof clevertap.syncVariables !== "function") {
-    console.error("[CARDO] clevertap.syncVariables unavailable — SDK not loaded, or below v1.11.10.");
+  const blockers = preflightSync();
+  if (blockers.length > 0) {
+    console.error("[CARDO] ❌ Cannot sync — fix these first:");
+    blockers.forEach((b, i) => console.error(`   ${i + 1}. ${b}`));
     return;
   }
+
+  console.log("[CARDO] Pre-flight passed. Syncing variable definitions to dashboard…");
   clevertap.syncVariables(
-    function () { console.log("[CARDO] ✅ Variables synced — check Product Experiences -> Variables."); },
-    function (err) { console.error("[CARDO] ❌ Variable sync failed. Confirm this is a test profile, the account token is set in index.html, and no other draft exists.", err); }
+    function () {
+      console.log("[CARDO] ✅ Sync reported success — check Dashboard -> Product Experiences -> Variables.");
+      console.log("[CARDO] Expecting: var_language (String), var_visibility (Boolean).");
+    },
+    function (err) {
+      console.error("[CARDO] ❌ Sync failed. The two most common server-side causes:", err);
+      console.error("   1. This profile is NOT marked as a test profile in the dashboard.");
+      console.error("      → run cardoIdentify(\"you@company.com\"), find that profile, mark it as a test profile, retry.");
+      console.error("   2. Another profile already has an unpublished variable DRAFT — CleverTap blocks the sync to avoid overwriting it.");
+      console.error("      → publish or dismiss that draft in Product Experiences -> Variables, then retry.");
+    }
   );
 };
 
@@ -149,6 +193,15 @@ window.cardoDiagnostics = function () {
   console.table ? console.table(info) : console.log(info);
   if (!ready) {
     console.warn("[CARDO] Real SDK not detected yet. If this persists past a few seconds: check for an ad/tracker blocker, and confirm a.js loads in the Network tab.");
+  }
+
+  // Why aren't variables in the dashboard? Print the ordered verdict.
+  const blockers = preflightSync();
+  if (blockers.length === 0) {
+    console.log("[CARDO] ✅ All client-side prerequisites met. If variables still aren't in the dashboard, you have not yet run cardoSyncVariables() — defining a variable does NOT create it in the dashboard.");
+  } else {
+    console.warn("[CARDO] ⚠️ Client-side blockers preventing variables from reaching the dashboard:");
+    blockers.forEach((b, i) => console.warn(`   ${i + 1}. ${b}`));
   }
   return info;
 };
